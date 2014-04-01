@@ -7,7 +7,20 @@ class AlbaranesController extends BaseController {
     public function mostrarAlbaranes()
     {
         $albaranes = Albaran::all();
+        /*
         
+        $albaranes = Albaran::where('IdDocumento', '=', '6')->take(1)->get();
+
+        echo $albaranes[0]->NumeroDocumento;
+
+        $albaranes[0]->NumeroDocumento = "A-10-0001";
+
+        //$albaranes[0]->save();
+
+        DB::table('albaranes')
+            ->where('IdDocumento', '6')
+            ->update(array('NumeroDocumento' => $albaranes[0]->NumeroDocumento));
+        */
         // Con el método all() le estamos pidiendo al modelo de Usuario
         // que busque todos los registros contenidos en esa tabla y los devuelva en un Array
         
