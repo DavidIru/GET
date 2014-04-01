@@ -1,6 +1,6 @@
 <?php 
-class Albaran extends Eloquent {
-    protected $table = 'albaranes';
+class Pedidos extends Eloquent {
+    protected $table = 'Pedidos';
 
     protected $primaryKey = "IdDocumento";
 

@@ -1,0 +1,424 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"CACHE",
+				"CACHE_MIDDLEWARE_ANONYMOUS_ONLY"
+			],
+			[
+				"STATIC",
+				"STATIC_ROOT"
+			],
+			[
+				"Enlae",
+				"EnlaceViewSet"
+			],
+			[
+				"Enl",
+				"EnlaceSerializer"
+			],
+			[
+				"TEMPLAT",
+				"TEMPLATE_CONTEXT_PROCESSORS"
+			],
+			[
+				"Mod",
+				"ModelAdmin"
+			],
+			[
+				"En",
+				"Enlace"
+			],
+			[
+				"Enlace",
+				"EnlaceInline"
+			],
+			[
+				"csv",
+				"csv_line"
+			],
+			[
+				"field",
+				"field_list"
+			],
+			[
+				"auto_now",
+				"auto_now_add"
+			],
+			[
+				"rende",
+				"render_to_response"
+			],
+			[
+				"Http",
+				"HttpResponseRedirect"
+			],
+			[
+				"get",
+				"get_object_or_404"
+			],
+			[
+				"ma",
+				"max_length"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/davidiruzubietablanco/development/GET/server.php",
+			"settings":
+			{
+				"buffer_size": 519,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 207.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"styl",
+				"Set Syntax: Stylus"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/davidiruzubietablanco/development/GET/GET.sublime-project",
+		"/Users/davidiruzubietablanco/development/GET/app/views/albaranes/GET.sublime-project",
+		"/Users/davidiruzubietablanco/development/GET/app/views/albaranes/lista.blade.php",
+		"/Users/davidiruzubietablanco/development/GET/app/routes.php",
+		"/Users/davidiruzubietablanco/development/GET/app/controllers/AlbaranesController.php",
+		"/Users/davidiruzubietablanco/development/GET/app/config/database.php",
+		"/Users/davidiruzubietablanco/development/GET/app/models/albaranes.php",
+		"/Users/davidiruzubietablanco/development/GET/app/database/migrations/2014_03_30_224952_create_user_table.php",
+		"/Users/davidiruzubietablanco/development/GET/app/models/User.php",
+		"/Applications/MAMP/bin/phpMyAdmin/config.inc.php",
+		"/Applications/MAMP/bin/startMysql.sh",
+		"/Users/davidiruzubietablanco/Downloads/iruzubieta.sql",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/inicio.php",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/promociones.php",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/index.php",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/class/menu.php",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/css/estilo.css",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/galeria.php",
+		"/Users/davidiruzubietablanco/development/pfc/eiruzubieta/app/config/database.php",
+		"/Users/davidiruzubietablanco/development/pfc/eiruzubieta/app/config/compile.php",
+		"/Users/davidiruzubietablanco/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/davidiruzubietablanco/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/footer.php",
+		"/private/var/folders/0x/bzjszz_50mv585bq6djlby0r0000gn/T/5c72ad6f-8903-46f5-a7a8-07d790456ca1/public_html/includes/constantes.php",
+		"/Volumes/TOSHIBA EXT/www/samperfoto/includes/funciones_admin.php",
+		"/Volumes/TOSHIBA EXT/www/samperfoto/index.php",
+		"/Users/davidiruzubietablanco/Downloads/dump.sql",
+		"/Users/davidiruzubietablanco/Downloads/cdto_2_6/README.md",
+		"/Users/davidiruzubietablanco/development/django/pruebas/pruebas/wsgi.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/pruebas/urls.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/pruebas/settings.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/dump.rdb",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/forms.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/manage.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/taskspy",
+		"/Users/davidiruzubietablanco/redis_run",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/models.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/views.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/tests.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/templates/index.html",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/context_processors.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/middleware.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/admin.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/templates/menu.html",
+		"/Users/davidiruzubietablanco/development/django/pruebas/actions.py",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/templates/form.html",
+		"/Users/davidiruzubietablanco/Downloads/clase3/pulse 2/actions.py",
+		"/Users/davidiruzubietablanco/Desktop/F5/f5.js",
+		"/Users/davidiruzubietablanco/Desktop/F5/manifest.json",
+		"/Users/davidiruzubietablanco/development/django/pruebas/app/templates/hora.html",
+		"/Users/davidiruzubietablanco/development/django/pruebas/pruebas/urls.pyc"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\"",
+			"\"\",\n",
+			",\n",
+			"font_face",
+			"staticfiles"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/davidiruzubietablanco/development/GET/server.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 519,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "GET.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"view",
+				"app/views.py"
+			],
+			[
+				"form",
+				"app/templates/form.html"
+			],
+			[
+				"model",
+				"app/models.py"
+			],
+			[
+				"sett",
+				"pruebas/settings.py"
+			],
+			[
+				"inde",
+				"app/templates/index.html"
+			],
+			[
+				"",
+				"app/models.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 189.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

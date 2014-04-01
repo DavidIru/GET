@@ -7,6 +7,7 @@ class AlbaranesController extends BaseController {
     public function mostrarAlbaranes()
     {
         $albaranes = Albaran::all();
+        $albaran = Albaran::find('6');
         /*
         
         $albaranes = Albaran::where('IdDocumento', '=', '6')->take(1)->get();
@@ -15,7 +16,7 @@ class AlbaranesController extends BaseController {
 
         $albaranes[0]->NumeroDocumento = "A-10-0001";
 
-        //$albaranes[0]->save();
+        $albaranes[0]->save();
 
         DB::table('albaranes')
             ->where('IdDocumento', '6')
