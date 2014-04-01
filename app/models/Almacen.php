@@ -1,5 +1,5 @@
 <?php 
-class Almacenes extends Eloquent {
+class Almacen extends Eloquent {
     protected $table = 'Almacenes';
 
     protected $primaryKey = "IdAlmacen";

@@ -1,5 +1,5 @@
 <?php 
-class Articulos extends Eloquent {
+class Articulo extends Eloquent {
     protected $table = 'Articulos';
 
     protected $primaryKey = "IdArticulo";
