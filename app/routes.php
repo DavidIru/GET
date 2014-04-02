@@ -15,5 +15,5 @@ Route::get('albaranes', array('uses' => 'AlbaranesController@mostrarAlbaranes'))
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('usuarios.login');
 });
