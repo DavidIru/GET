@@ -3,20 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-	<title>Login en la aplicación</title>
+	<title>GET - Login en la aplicación</title>
 	{{ HTML::style('css/login.css') }}
-	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
 </head>
 <body>
 	<figure>
-		{{ HTML::image('img/logo.jpg', "eIruzubieta.com", array('id' => 'logo', 'title' => 'eIruzubieta.com')) }}
+		{{ HTML::image('img/logo2.png', "eIruzubieta.com", array('id' => 'logo', 'title' => 'eIruzubieta.com')) }}
 	</figure>
-	<form action="" id="login">
-		<label for="usuario" class="icon-user"></label>
-		<input type="text" id="usuario" placeholder="Nombre de usuario" required="required">
-		<label for="pass" class="icon-key"></label>
-		<input type="password" id="pass" placeholder="Contraseña" required="required">
-		<input type="submit" id="enviar">
-	</form>
+	{{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
+    @if(Session::has('mensaje_error'))
+        <div id="mensaje-error"><h2>{{ Session::get('titulo_error') }}</h2><p>{{ Session::get('mensaje_error') }}</p></div>
+    @endif
+    @if(Session::has('mensaje_exito'))
+        <div id="mensaje-exito"><h2>{{ Session::get('titulo_exito') }}</h2><p>{{ Session::get('mensaje_exito') }}</p></div>
+    @endif
+	{{ Form::open(array('url' => '/login')) }}
+	{{ Form::token() }}
+		<div>
+			<label for="usuario" class="icono icon-user"></label>
+			{{ Form::text('usuario', Input::old('usuario'), array('required' => 'required', 'placeholder' => 'Nombre de usuario')); }}
+		</div>
+		<div>
+			<label for="pass" class="icono icon-key"></label>
+			{{ Form::password('pass', array('required' => 'required', 'placeholder' => 'Contraseña')); }}
+		</div>
+		<div>
+			{{ Form::checkbox('recordarme', true, null, array('id' => 'recordarme')) }}
+			<label for="recordarme" class="recordar">No cerrar sesión</label>
+		</div>
+		<div>
+			<input type="submit" id="enviar">
+		</div>
+	{{ Form::close() }}
+	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
 </body>
 </html>

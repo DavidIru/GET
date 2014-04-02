@@ -4,35 +4,98 @@
 
 vendor-prefixes = webkit moz o ms official
 
-naranja = #ff8a00
-
 body
-	background-color naranja
+	background-color #333
+	background-image url(../img/fondo.png)
 	color #333
 	font-size 16px
 
-form
-	margin 10em auto 0
-	overflow hidden
-	width 18.75em
+figure
+	margin 2em auto 0
 	text-align center
+	width 250px
+	img
+		width 222px
+
+form
+	margin 3em auto 0
+	overflow hidden
+	text-align center
+	width 18.75em
+	div
+		width 100%
 
 input
-	font-size 20px
-	height 2em
-	line-height 1em
-	margin 1em 0 0 -1em
-	padding .2em .2em .2em 1.6em
-	width 12em
+	border 1px solid #333
 	border-radius .25em
+	font-size 16px
+	font-weight 100
+	line-height 1.2em
+	margin 1.1em 0 0
+	padding .4em
+	width 90%
+
+input[type="checkbox"]
+	display inline-block
+	width 1em
 
 input[type="submit"]
-	margin 1em 
-	padding 0
-	width 60%
+	background-color #111
+	color #eee
+	margin 2em 0 1em
+	&:hover
+		background-color #ccc
+		color #111
 
 label
-	color #666
-	font-size 20px
-	left .7em
-	position relative
+	color #EEE
+	display none
+	&.icono
+		color #666
+		font-size 20px
+		left .7em
+		position relative
+		top 0
+		width 1em
+	&.recordar
+		display inline-block
+		font-size 14px
+		font-weight 100
+		position relative
+		text-align left
+		top .15em
+		width 18.5em
+
+#mensaje-error
+#mensaje-exito
+	border 1px solid transparent
+	border-left-width 2px
+	border-radius 2px
+	display block
+	height auto
+	margin 1em auto -3em
+	width 18.75em
+	h2
+		font-size 14px
+		line-height 2em
+		margin 0 1em
+	p
+		font-size 12px
+		line-height 1em
+		margin 0 1em 1em
+
+
+
+#mensaje-error
+	background-color #fdf7f7
+	border-color #f4dada
+	border-left-color #d9534f
+	h2
+		color #d9534f
+	
+#mensaje-exito
+	background-color #dff0d8
+	border-color #d6e9c6
+	border-left-color #468847
+	h2
+		color #468847
