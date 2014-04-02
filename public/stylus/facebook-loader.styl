@@ -1,0 +1,24 @@
+.loader { width:62px; height:32px; margin: 0 auto}
+
+.bar {
+    background-color:#ffcc8a; border:1px solid #cc7604; float:left;
+    margin-right:4px; margin-top:6px; width:6px; height:18px;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: loadingbar;
+}
+
+.loader .bar:nth-child(2) { animation-delay: 0.1s; }
+.loader .bar:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes loadingbar {
+     0% { }
+    10% { margin-top:5px; height:22px; border-color:#a3620c; background-color:#f6a234; }
+    20% { margin-top:0px; height:32px; border-color:#9e5e0b; background-color:#fabb69; }
+    30% { margin-top:1px; height:30px; border-color:#a3620c; background-color:#f6a234; }
+    40% { margin-top:3px; height:26px; }
+    50% { margin-top:5px; height:22px; }
+    60% { margin-top:6px; height:18px; }
+    70% { }
+    100% { }
+}

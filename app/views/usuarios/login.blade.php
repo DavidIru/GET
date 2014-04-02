@@ -10,6 +10,11 @@
 	<figure>
 		{{ HTML::image('img/logo2.png', "eIruzubieta.com", array('id' => 'logo', 'title' => 'eIruzubieta.com')) }}
 	</figure>
+	<div class="loader">
+	    <div class="bar"></div>
+	    <div class="bar"></div>
+	    <div class="bar"></div>
+	</div>
 	{{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
     @if(Session::has('mensaje_error'))
         <div id="mensaje-error"><h2>{{ Session::get('titulo_error') }}</h2><p>{{ Session::get('mensaje_error') }}</p></div>
@@ -36,5 +41,12 @@
 		</div>
 	{{ Form::close() }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
+	<script>
+		$(document).ready(function() {
+			$('.loader').fadeOut(400);
+			$('figure').animate({"margin-top": "2em"}, 1500);
+			$('form').fadeIn(1500);
+		});
+	</script>
 </body>
 </html>
