@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 class Pedido extends Eloquent {
     protected $table = 'Pedidos';
 

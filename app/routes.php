@@ -1,31 +1,28 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
-// Nos mostrará el formulario de login.
+// Mostramos el formulario de login
 Route::get('login', 'AuthController@verLogin');
 
-// Validamos los datos de inicio de sesión.
+// Validamos los datos de inicio de sesión
 Route::post('login', 'AuthController@postLogin');
 
-// Nos indica que las rutas que están dentro de él sólo serán mostradas si antes el usuario se ha autenticado.
+// Las rutas siguientes solo serán accesibles si el usuario está logueado
 Route::group(array('before' => 'auth'), function()
 {
-    // Esta será nuestra ruta de bienvenida.
-    Route::get('/', function()
-    {
-        return View::make('hello');
-    });
-    // Esta ruta nos servirá para cerrar sesión.
+    // Mostramos la pantalla de inicio
+    Route::get('/', 'HomeController@inicial');
+    // Mostramos la pantalla de pedidos
+    Route::get('pedidos', 'PedidosController@inicial');
+    // Editamos un pedido concreto
+    Route::get('pedido/{id}', 'PedidosController@editar')
+    ->where('id', '[0-9]+');
+    /*
+    	Route::get('/', function()
+	    {
+	        return View::make('home');
+	    });
+	*/
+    // Cerramos la sesión
+    Route::get('pruebas', 'HomeController@pruebas');
     Route::get('logout', 'AuthController@logout');
 });
 /*
@@ -36,3 +33,4 @@ Route::get('/', function()
 	return View::make('usuarios.login');
 });
 */
+?>

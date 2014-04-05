@@ -24,5 +24,9 @@ class Usuario extends Eloquent implements UserInterface {
 	{
 		return $this->password;
 	}
+
+	public function rol() {
+		return $this->belongsTo('Rol', 'rol_id');
+	}
 }
 ?>

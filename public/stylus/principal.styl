@@ -1,0 +1,165 @@
+@import 'nib'
+@import 'normalize'
+@import 'fuentes'
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,900);
+
+vendor-prefixes = webkit moz o ms official
+
+anchura_menu = 240px
+
+body
+	font-family 'Lato', sans-serif
+	font-size 16px
+	font-weight 100
+	margin 0
+	color #333
+header
+	background-color #333
+	background-image url(../img/fondo.png)
+	height 3.4em
+	margin 0 auto
+	width 100%
+	figure
+		display inline-block
+		margin 0
+		width 200px
+		img
+			margin 0.2em 1em
+			width 111px
+	span
+		color #fff
+		display inline-block
+		font-size 30px
+		padding 5px
+		position absolute
+		right 10px
+		top 8px
+		&:hover
+			cursor pointer
+nav
+	background-color #313542
+	bottom 0
+	font-family 'Lato', sans-serif
+	margin 0
+	overflow auto
+	padding 0
+	position absolute
+	top 0
+	width anchura_menu
+	z-index 1
+	h2
+		font-size 12px
+		color #666d83
+		margin 1em 0 0 1.2em
+		padding-bottom .2em
+		text-transform uppercase
+		border-bottom: solid 1px #434754
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+	li
+		list-style none
+		margin 0
+		padding 0
+		width anchura_menu
+		a
+			border-top: solid 1px #434754
+			color #fff
+			display block
+			font-size 14px
+			font-weight 100
+			height 2.5em
+			line-height 2.5em
+			margin-left 1em
+			max-width anchura_menu
+			text-decoration none
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+			span
+				padding 0.5em
+		&:first-child
+			border-top none
+		&:hover
+			background-color #1b1c22
+	ul
+		margin 0
+		padding 0
+
+#breadcrumbs
+	h3
+		border-bottom 1px solid #ccc
+		font-family 'Lato', sans-serif
+		margin 0.2em 0 0 1em
+		padding 0 0 0.2em 0
+		a
+		p
+			color #333
+			display inline-block
+			font-size 12px
+			font-weight 100
+			margin 0
+			text-decoration none
+		a
+			font-weight 900
+			&:hover
+				text-decoration underline
+		span
+			font-weight 300
+
+#contenedor
+	border-top 1px solid #000
+	bottom 0
+	overflow hidden
+	position absolute
+	top 3.4em
+	width 100%
+
+#contenido
+	background-color #fff
+	bottom 0
+	box-shadow -5px 0 30px 0 rgba(10, 10, 10, 1) 
+	overflow auto
+	position absolute
+	top 0
+	width 100%
+	z-index 2
+	article
+		display inline-block
+		margin 2em 0
+		text-align center
+		width 49%
+		h2
+			padding 0 1em 0 0
+			height 2em
+		h4
+			font-size 80px
+			margin 0
+		&#media-semanal
+			border-right 1px solid #aaa
+		&#media-total
+			border none
+	h2
+		font-size 14px
+		font-weight 900
+		margin 1em 2em 0
+
+/* Colores */
+.amarillo
+	color #FDF872
+.azul
+	color #73B6FF
+.azul-claro
+	color #B7F3F1
+.gris
+	color #8a8a8a
+.morado
+	color #7D4385
+.naranja
+	color #FFBD76
+.rojo
+	color #FF6E79
+.rosa
+	color #fd9ce2
+.verde
+	color #91FD77
+
+@import 'jquery.dynatable'
+
+	

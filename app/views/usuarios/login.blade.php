@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 	<title>GET - Login en la aplicación</title>
 	{{ HTML::style('css/login.css') }}
 </head>
 <body>
 	<figure>
-		{{ HTML::image('img/logo2.png', "eIruzubieta.com", array('id' => 'logo', 'title' => 'eIruzubieta.com')) }}
+		{{ HTML::image('img/logo.png', "eIruzubieta.com", array('id' => 'logo', 'title' => 'eIruzubieta.com')) }}
 	</figure>
 	<div class="loader">
 	    <div class="bar"></div>
@@ -37,13 +38,13 @@
 			<label for="recordarme" class="recordar">No cerrar sesión</label>
 		</div>
 		<div>
-			<input type="submit" id="enviar">
+			{{ Form::submit('Enviar') }}
 		</div>
 	{{ Form::close() }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
 	<script>
 		$(document).ready(function() {
-			$('.loader').fadeOut(400);
+			$('.loader').fadeTo(400, 0);
 			$('figure').animate({"margin-top": "2em"}, 1500);
 			$('form').fadeIn(1500);
 		});

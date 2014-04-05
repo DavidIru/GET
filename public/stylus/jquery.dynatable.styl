@@ -1,0 +1,96 @@
+#pedidos
+	border 1px solid #aaa
+	margin 0 auto
+	width 94%
+	tbody
+		font-size 11px
+		tr
+			background-color #fffdf6
+			border 1px solid #aaa
+			height 2em
+			&.situacion-pendiente
+				background-color #f9faad
+			&.situacion-null
+				background-color #d1faad
+			&:nth-child(even)
+				background-color #fef5dd
+			td
+				padding-left .5em
+				span
+					text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+	thead
+		font-size 10px
+		font-weight 900
+		text-transform uppercase
+		tr
+			background-color #fac08d
+			height 2em
+			td
+				padding-left .5em
+				a
+					color #333
+
+					span
+						font-size 8px
+						vertical-align middle
+
+.dynatable-search
+	float right
+	margin 1em 3% 1em 0
+	font-size 10px
+
+.dynatable-per-page
+	float left
+	margin 1em 0 1em 3%
+	font-size 10px
+	select
+		font-size 12px
+
+.dynatable-pagination-links
+	float none
+	text-align center
+	padding 0
+
+.dynatable-record-count
+	display block
+	padding 5px 0
+
+.dynatable-pagination-links span
+.dynatable-pagination-links li
+	display inline-block
+	font-size 10px
+	margin 0 0.2em
+	a
+		padding .4em .8em
+		&:hover
+			background-color #f9a73a
+			border-radius 5px
+
+.dynatable-page-link
+.dynatable-page-break
+	display block
+	padding 5px 0
+
+.dynatable-page-link
+	cursor pointer
+
+.dynatable-active-page
+.dynatable-disabled-page
+	cursor text
+
+.dynatable-active-page:hover
+.dynatable-disabled-page:hover
+	text-decoration none
+
+.dynatable-active-page
+	background-color #f9c580 !important
+	border-radius 5px
+	color #000
+	font-weight 900
+	font-size 12px
+
+.dynatable-disabled-page
+.dynatable-disabled-page:hover
+	background-color #fff !important
+	color #999
+
