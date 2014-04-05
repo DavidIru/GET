@@ -14,7 +14,7 @@
 @section('breadcrumb')
 	<div id="breadcrumbs">
 		<h3>
-			<a href="{{ URL::to('/') }}" title="Volver a inicio">Inicio</a>
+			<a href="{{ URL::to('/')}}">Inicio</a>
 			<span>></span>
 			<p>Pedidos</p>
 		</h3>
@@ -22,12 +22,7 @@
 @stop
 
 @section('contenido')
-	@if($todos)
-		<h2>Listado de pedidos completo <a href="{{ URL::to('pedidos')}}" title="Mostrar 100 últimos">(Mostrar 100 últimos)</a></h2>
-	@else
-		<h2>Listado de últimos 100 pedidos <a href="{{ URL::to('_pedidos')}}" title="Mostrar todos">(Mostrar todos)</a></h2>
-	@endif
-	
+	<h2>Listado de pedidos</h2>
 	<table id="pedidos">
 		<thead>
 			<tr>

@@ -10,8 +10,10 @@ Route::group(array('before' => 'auth'), function()
 {
     // Mostramos la pantalla de inicio
     Route::get('/', 'HomeController@inicial');
-    // Mostramos la pantalla de pedidos
+    // Mostramos la pantalla de pedidos (100 últimos)
     Route::get('pedidos', 'PedidosController@inicial');
+    // Mostramos la pantalla de pedidos (todos)
+    Route::get('_pedidos', 'PedidosController@mostrarTodos');
     // Editamos un pedido concreto
     Route::get('pedido/{id}', 'PedidosController@editar')
     ->where('id', '[0-9]+');
