@@ -2,15 +2,16 @@
 class PedidosController extends BaseController {
 
     public function inicial() {
-        $pedidos = Pedido::orderBy('IdDocumento', 'desc')->take(100)->get();
+        $pedidos = Pedido::select('IdDocumento', 'NumeroDocumento', 'CLNombre', 'CLTelefono')->orderBy('IdDocumento', 'desc')->take(100)->get();
 
         return View::make('pedidos.listado', array('pedidos' => $pedidos, 'todos' => false));
     }
 
-    public function editar($pedido_id) {
-    	$pedido = Pedido::find($pedido_id);
+    public function detalles($pedido_id) {
+    	$pedido = Pedido::select('NumeroDocumento', 'FechaDocumento', 'CLNombre', 'CLNombreEnvio', 'CLDireccionEnvio', 'CLCiudadEnvio', 'CLProviniciaEnvio', 'CLCodPostalEnvio', 'CLTelefonoEnvio', 'Situacion', 'ImporteAcuenta', 'DescripcionFormaPagoDocumento')->find($pedido_id);
+        $productos = PedidosDetalle::select('ArticuloDescripcion', 'Cantidad', 'Precio')->where('NumeroDocumento', $pedido->NumeroDocumento)->get();
 
-    	return $pedido->NumeroDocumento;
+    	return View::make('pedidos.formulario', array('pedido' => $pedido, 'productos' => $productos));
     }
 
     public function mostrarTodos() {
@@ -19,4 +20,3 @@ class PedidosController extends BaseController {
         return View::make('pedidos.listado', array('pedidos' => $pedidos, 'todos' => true));
     }
 }
-?> 

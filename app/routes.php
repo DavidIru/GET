@@ -15,7 +15,7 @@ Route::group(array('before' => 'auth'), function()
     // Mostramos la pantalla de pedidos (todos)
     Route::get('_pedidos', 'PedidosController@mostrarTodos');
     // Editamos un pedido concreto
-    Route::get('pedido/{id}', 'PedidosController@editar')
+    Route::get('pedido/{id}', 'PedidosController@detalles')
     ->where('id', '[0-9]+');
     /*
     	Route::get('/', function()
@@ -23,6 +23,11 @@ Route::group(array('before' => 'auth'), function()
 	        return View::make('home');
 	    });
 	*/
+    // Mostramos la pantalla de usuarios
+    Route::get('usuarios', 'UsuariosController@mostrarTodos');
+    Route::get('usuario/{id}', 'UsuariosController@usuario')
+    ->where('id', '[0-9]+');
+
     // Cerramos la sesión
     Route::get('pruebas', 'HomeController@pruebas');
     Route::get('logout', 'AuthController@logout');

@@ -21,13 +21,14 @@
 
 @section('contenido')
 	<h2>Pedidos pendientes</h2>
-	<table id="pedidos">
+	<table id="tabla">
 		<thead>
 			<tr>
-				<td data-dynatable-no-sort></td>
-				<td>Núm. Doc</td>
-				<td>Cliente</td>
-				<td>Teléfono</td>
+				<th data-dynatable-no-sort></th>
+				<th style="display: none">id</th>
+				<th>Núm. Doc</th>
+				<th>Cliente</th>
+				<th>Teléfono</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,7 +41,8 @@
 				<span class="icon-truck verde"></span>
 			@endif
 			</td>
-			<td style="font-weight: 900">{{ $pedido->NumeroDocumento }}</td>
+			<td>{{ $pedido->IdDocumento }}</td>
+			<td>{{ $pedido->NumeroDocumento }}</td>
 			<td>{{ (strlen($pedido->CLNombre)>20) ? substr($pedido->CLNombre, 0, 20)."..." : $pedido->CLNombre }}</td>
 			<td>{{ explode(' ', $pedido->CLTelefono)[0] }}</td>
 		</tr>
@@ -62,11 +64,15 @@
 	<script>
 		$(document).ready(function() {
 			
-			$('#pedidos').dynatable({
+			$('#tabla').dynatable({
 				features: {
 					recordCount: false
 				}
 			});
+		});
+
+		$('#tabla tbody').on('click', "tr", function() {
+			$(location).attr('href',"{{ URL::to('pedido/" + $(this).data("id") + "') }}");
 		});
 	</script>
 @stop

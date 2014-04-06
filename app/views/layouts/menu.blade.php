@@ -1,7 +1,7 @@
 <nav id="menu">
 	<h2>Acciones principales</h2>
 	<ul>
-		<li><a href="{{ URL::to('/')}}" title="Ir a inicio"><span class="icon-home naranja"></span>Inicio</a></li>
+		<li><a href="{{ URL::to('/') }}" title="Ir a inicio"><span class="icon-home naranja"></span>Inicio</a></li>
 		@if ($rol_id == 1 || $rol_id == 2)
 		<li><a href="{{ URL::to('pedidos')}}" title="Gestionar pedidos"><span class="icon-cart gris"></span>Pedidos</a></li>
 		@endif
@@ -15,7 +15,7 @@
 	@if ($rol_id == 1)
 	<h2>Acciones de administración</h2>
 	<ul>
-		<li><a href="#" title="Gestionar usuarios"><span class="icon-users morado"></span>Gestionar usuarios</a></li>
+		<li><a href="{{ URL::to('usuarios')}}" title="Gestionar usuarios"><span class="icon-users morado"></span>Gestionar usuarios</a></li>
 		<li><a href="#" title="Gestionar mensajes"><span class="icon-envelope azul-claro"></span>Mensajes por defecto</a></li>
 	</ul>
 	@endif

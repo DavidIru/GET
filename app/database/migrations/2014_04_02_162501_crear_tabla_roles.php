@@ -16,7 +16,7 @@ class CrearTablaRoles extends Migration {
         {
             $table->increments('id');
             
-            $table->string('rol', 100);
+            $table->string('rol', 100)->unique();
             
             $table->timestamps();
         });

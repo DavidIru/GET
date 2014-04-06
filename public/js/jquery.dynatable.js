@@ -286,8 +286,11 @@
     for (var i = 0, len = columns.length; i < len; i++) {
       tr += cellWriter(columns[i], record);
     }
+    if(record['id'] != undefined)
+      return '<tr data-id="' + record['id'] + '">' + tr + '</tr>';
+    else
+      return '<tr>' + tr + '</tr>';
 
-    return '<tr>' + tr + '</tr>';
   };
 
   function defaultCellWriter(column, record) {

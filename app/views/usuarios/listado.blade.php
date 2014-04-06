@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titulo')
-	GET - Gestión de Pedidos
+	GET - Gestión de Usuarios
 @stop
 
 @section('estilos')
@@ -16,34 +16,29 @@
 		<h3>
 			<a href="{{ URL::to('/') }}" title="Volver a inicio">Inicio</a>
 			<span>></span>
-			<p>Pedidos</p>
+			<p>Gestionar usuarios</p>
 		</h3>
 	</div>
 @stop
 
 @section('contenido')
-	@if($todos)
-		<h2>Listado de pedidos completo <a href="{{ URL::to('pedidos')}}" title="Mostrar 100 últimos">(Mostrar 100 últimos)</a></h2>
-	@else
-		<h2>Listado de últimos 100 pedidos <a href="{{ URL::to('_pedidos')}}" title="Mostrar todos">(Mostrar todos)</a></h2>
-	@endif
-	
+	<h2>Listado de usuarios</h2>
 	<table id="tabla">
 		<thead>
 			<tr>
 				<th style="display: none">id</th>
-				<th>Núm. Doc</th>
-				<th>Cliente</th>
-				<th>Teléfono</th>
+				<th>Nombre</th>
+				<th>Rol</th>
+				<th>Usuario</th>
 			</tr>
 		</thead>
 		<tbody>
-		@foreach ($pedidos as $pedido)
+		@foreach ($usuarios as $usuario)
 			<tr>
-				<td>{{ $pedido->IdDocumento }}</td>
-				<td>{{ $pedido->NumeroDocumento }}</td>
-				<td>{{ (strlen($pedido->CLNombre)>20) ? substr($pedido->CLNombre, 0, 20)."..." : $pedido->CLNombre }}</td>
-				<td>{{ substr($pedido->CLTelefono, 0, 9) }}</td>
+				<td>{{ $usuario->id }}</td>
+				<td>{{ $usuario->nombre }}</td>
+				<td>{{ $usuario->rol->rol }}</td>
+				<td>{{ $usuario->usuario }}</td>
 			</tr>
 		@endforeach
 		</tbody>
@@ -65,7 +60,7 @@
 			});
 
 			$('#tabla tbody').on('click', "tr", function() {
-				$(location).attr('href',"{{ URL::to('pedido/" + $(this).data("id") + "') }}");
+				$(location).attr('href',"{{ URL::to('usuario/" + $(this).data("id") + "') }}");
 			});
 		});
 	</script>
