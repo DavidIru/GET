@@ -25,7 +25,17 @@ class UsuariosController extends BaseController {
 
 		$mensaje = array('numero' => Input::get('mensaje'), 'error' => true);
 		//echo $mensaje;
-		if($mensaje['numero'] == "mensaje1") {
+		if($mensaje['numero'] == "mensaje0") {
+			//Procesamos el usuario
+			$datos = array(
+	            'nombre' => Input::get('nombre')
+	        );
+
+	        $validacion = array(
+        		'nombre' => array('required', 'max:100')
+        	);
+		}
+		elseif($mensaje['numero'] == "mensaje1") {
 			//Procesamos el usuario
 			$datos = array(
 	            'usuario' => Input::get('usuario')
@@ -67,7 +77,11 @@ class UsuariosController extends BaseController {
 		    return View::make('usuarios.formulario', array('usuario' => $usuario, 'roles' => $roles, 'errores' => $errores->all(), 'mensaje' => $mensaje));
 		}
 		else {
-		    if($mensaje['numero'] == "mensaje1") {
+		    if($mensaje['numero'] == "mensaje0") {
+				//Cambiamos el usuario
+				$usuario->nombre = $datos['nombre'];
+			}
+			elseif($mensaje['numero'] == "mensaje1") {
 				//Cambiamos el usuario
 				$usuario->usuario = $datos['usuario'];
 			}

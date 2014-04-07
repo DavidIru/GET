@@ -33,8 +33,29 @@
 			<h4><strong>Creación:</strong> {{ date("d/m/Y H:i", strtotime($usuario->created_at)) }}h</h4>
 			<h4><strong>Último cambio:</strong> {{ ($usuario->updated_at == $usuario->created_at)? "No ha habido cambios" : date("d/m/Y H:i", strtotime($usuario->updated_at))."h" }}</h4>
 		</div>
+		<div id="usuariocambios0">
+			<h2>Cambiar nombre completo</h2>
+			<p>Este es el nombre con el que se le verá en la aplicación.</p>
+			@if (isset($mensaje) && $mensaje['numero'] == "mensaje0")
+				@if ($mensaje['error'])
+					<div id="mensaje" class="error">
+					@foreach ($errores as $error)
+						<p>{{ $error }}</p>
+					@endforeach
+				@else
+					<div id="mensaje" class="exito">
+						<p>El nombre ha sido actualizado.</p>
+				@endif
+					</div>
+			@endif
+			{{ Form::open() }}
+				{{ Form::text('nombre', Input::old('nombre'), array('required' => 'required', 'placeholder' => 'Nuevo nombre completo')); }}
+				{{ Form::hidden('mensaje', 'mensaje0') }}
+				{{ Form::submit('Enviar') }}
+			{{ Form::close() }}
+		</div>
 		<div id="usuariocambios1">
-			<h2>Cambiar nombre del usuario</h2>
+			<h2>Cambiar nombre de usuario</h2>
 			<p>Este es el nombre que utilizará para acceder a la aplicación web. La longitud mínima es de cinco caracteres.</p>
 			@if (isset($mensaje) && $mensaje['numero'] == "mensaje1")
 				@if ($mensaje['error'])

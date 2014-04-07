@@ -1231,11 +1231,9 @@
         .bind(settings.inputs.queryEvent, function() {
           obj.queries.runSearch($(this).val());
         })
-        .bind('keypress', function(e) {
-          if (e.which == 13) {
+        .on('keyup', function(e) {
             obj.queries.runSearch($(this).val());
             e.preventDefault();
-          }
         });
       return $searchSpan;
     };
