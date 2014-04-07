@@ -24,7 +24,6 @@
         <div id="mensaje-exito"><h2>{{ Session::get('titulo_exito') }}</h2><p>{{ Session::get('mensaje_exito') }}</p></div>
     @endif
 	{{ Form::open(array('url' => '/login')) }}
-		{{ Form::token() }}
 		<div>
 			<label for="usuario" class="icono icon-user"></label>
 			{{ Form::text('usuario', Input::old('usuario'), array('required' => 'required', 'placeholder' => 'Nombre de usuario')) }}

@@ -21,7 +21,7 @@
 	@endif
 	<h2>Usuario</h2>
 	<ul>
-		<li><a href="#" title="Ver perfil"><span class="icon-user"></span>{{ Auth::user()->nombre }}</a></li>
+		<li><a href="/perfil" title="Ver perfil"><span class="icon-user"></span>{{ Auth::user()->nombre }}</a></li>
 		<li><a href="/logout" title="Cerrar sesión"><span class="icon-switch rojo"></span>Cerrar sesión</a></li>
 	</ul>	
 </nav>

@@ -10,6 +10,8 @@ class Usuario extends Eloquent implements UserInterface {
     // Campos excluidos del JSON
     protected $hidden = array('password');
 
+    protected $guarded = array('id');
+
     //protected $visible = array('id', 'nombre', 'usuario', 'rol_id');
 
     public function getAuthIdentifier()

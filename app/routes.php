@@ -2,9 +2,6 @@
 // Mostramos el formulario de login
 Route::get('login', 'AuthController@verLogin');
 
-// Validamos los datos de inicio de sesión
-Route::post('login', 'AuthController@postLogin');
-
 // Las rutas siguientes solo serán accesibles si el usuario está logueado
 Route::group(array('before' => 'auth'), function()
 {
@@ -27,10 +24,30 @@ Route::group(array('before' => 'auth'), function()
     Route::get('usuarios', 'UsuariosController@mostrarTodos');
     Route::get('usuario/{id}', 'UsuariosController@usuario')
     ->where('id', '[0-9]+');
+    Route::get('usuario/{id}/eliminar', 'UsuariosController@eliminar')
+    ->where('id', '[0-9]+');
+    Route::get('usuario/add', 'UsuariosController@formularioAdd');
+
+    Route::get('perfil', 'UsuariosController@perfil');
 
     // Cerramos la sesión
     Route::get('pruebas', 'HomeController@pruebas');
     Route::get('logout', 'AuthController@logout');
+});
+
+Route::group(array('before' => 'csrf'), function()
+{
+    // Validamos los datos de inicio de sesión
+    Route::post('login', 'AuthController@postLogin');
+
+    Route::post('usuario/{id}', 'UsuariosController@editar')
+    ->where('id', '[0-9]+');
+    Route::post('usuario/{id}/eliminar', 'UsuariosController@eliminar')
+    ->where('id', '[0-9]+');
+
+    Route::post('perfil', 'UsuariosController@editarPerfil');
+
+    Route::post('usuario/add', 'UsuariosController@add');
 });
 /*
 Route::get('albaranes', array('uses' => 'AlbaranesController@mostrarAlbaranes'));

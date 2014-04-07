@@ -81,7 +81,22 @@ nav
 	ul
 		margin 0
 		padding 0
-
+#add
+	background-color #f4f4f4
+	border 1px solid #ccc
+	border-radius 4px
+	color #333
+	display block
+	font-size 14px
+	margin 1em
+	padding .3em
+	text-decoration none
+	width 40%
+	span
+		margin-right .4em
+		text-shadow: 0 0 0 rgba(0, 0, 0, 1);
+	&:hover
+		background-color #e0e0e0
 #breadcrumbs
 	h3
 		border-bottom 1px solid #ccc
@@ -148,6 +163,23 @@ nav
 			&:hover
 				text-decoration underline
 
+#mensaje
+	margin 1em 5%
+	width 90%
+	border 1px solid transparent
+	border-left-width 2px
+	border-radius 2px
+	display block
+	height auto
+	p
+		font-size 11px
+		line-height 1em
+		margin 1em
+	&.exito
+		background-color #dff0d8
+		border-color #d6e9c6
+		border-left-color #468847
+
 /* Colores */
 .amarillo
 	color #FDF872
@@ -162,12 +194,13 @@ nav
 .naranja
 	color #FFBD76
 .rojo
-	color #FF6E79
+	color #FF6E79			
 .rosa
 	color #fd9ce2
 .verde
 	color #91FD77
-
+.verde-oscuro
+	color #64ab26
 
 @import 'pedido'
 @import 'usuario'

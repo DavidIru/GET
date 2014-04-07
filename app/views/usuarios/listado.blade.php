@@ -23,6 +23,12 @@
 
 @section('contenido')
 	<h2>Listado de usuarios</h2>
+	<a href="{{ URL::to('usuario/add') }}" id="add">
+		<span class="icon-plus-circle verde-oscuro"></span>Añadir usuario
+	</a>
+	@if(isset($exito))
+		<div id="mensaje" class="exito"><p>{{ $exito }}</p></div>
+	@endif
 	<table id="tabla">
 		<thead>
 			<tr>

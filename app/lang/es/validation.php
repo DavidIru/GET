@@ -65,14 +65,14 @@ return array(
 	"required_if"      => "El campo :attribute es requerido cuando el campo :other es :value.",
 	"required_with"    => "El campo :attribute es requerido con los valores :values.",
 	"required_without" => "El campo :attribute es requerido sin los valores :values.",
-	"same"           => "El campo :attribute y :other debe coincidir.",
+	"same"           => "Los campos :attribute y :other deben coincidir.",
 	"size"           => array(
 		"numeric" => "El campo :attribute debe tener un tamaño de :size.",
 		"file"    => "El campo :attribute debe tener :size kilobytes.",
 		"string"  => "El campo :attribute debe tener :size caracteres.",
 		"array"   => "El campo :attribute debe tener :size elementos.",
 	),
-	"unique"         => "El campo :attribute ya ha sido tomado.",
+	"unique"         => "El campo :attribute ya existe en la base de datos.",
 	"url"            => "El formato de :attribute es inválido.",
 
 	/*
@@ -109,7 +109,10 @@ return array(
 
 	'attributes' => array(
 		'username' => 'usuario',
-		'password' => 'contraseña'
+		'password' => 'contraseña',
+		'pass' => 'contraseña',
+		'pass2' => 'contraseña repetida',
+		'pass_ant' => 'contraseña antigua'
 	),
 
 );

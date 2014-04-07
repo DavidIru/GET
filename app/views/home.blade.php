@@ -34,11 +34,11 @@
 		<tbody>
 	@foreach ($pedidos as $pedido)
 		<tr>
-			<td data-dynatable-amarillo>
+			<td>
 			@if($pedido->Situacion == 'Pendiente Recibir Material')
 				<span class="icon-alarm amarillo"></span>
 			@else
-				<span class="icon-truck verde"></span>
+				<span class="icon-truck verde-oscuro"></span>
 			@endif
 			</td>
 			<td>{{ $pedido->IdDocumento }}</td>
