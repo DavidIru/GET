@@ -286,10 +286,13 @@
     for (var i = 0, len = columns.length; i < len; i++) {
       tr += cellWriter(columns[i], record);
     }
+    var eti_tr = "<tr";
     if(record['id'] != undefined)
-      return '<tr data-id="' + record['id'] + '">' + tr + '</tr>';
-    else
-      return '<tr>' + tr + '</tr>';
+      eti_tr += ' data-id="' + record['id'] + '"';
+    if (record['clase'] != undefined)
+      eti_tr += ' class="' + record['clase'] + '"';
+    eti_tr += '>' + tr + '</tr>';
+    return eti_tr;
 
   };
 

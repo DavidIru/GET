@@ -37,9 +37,10 @@
 			@if (isset($mensaje))
 				@if ($mensaje['error'])
 					<div id="mensaje" class="error">
-					@foreach ($errores as $error)
-						<p>{{ $error }}</p>
-					@endforeach
+						<h4>Revise lo siguiente:</h4>
+						@foreach ($errores as $error)
+							<p>{{ $error }}</p>
+						@endforeach
 				@else
 					<div id="mensaje" class="exito">
 						<p>La contraseña del usuario ha sido actualizada.</p>

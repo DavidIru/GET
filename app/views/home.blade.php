@@ -24,8 +24,8 @@
 	<table id="tabla">
 		<thead>
 			<tr>
-				<th data-dynatable-no-sort></th>
 				<th style="display: none">id</th>
+				<th style="display: none">clase</th>
 				<th>Núm. Doc</th>
 				<th>Cliente</th>
 				<th>Teléfono</th>
@@ -34,16 +34,11 @@
 		<tbody>
 	@foreach ($pedidos as $pedido)
 		<tr>
-			<td>
-			@if($pedido->Situacion == 'Pendiente Recibir Material')
-				<span class="icon-alarm amarillo"></span>
-			@else
-				<span class="icon-truck verde-oscuro"></span>
-			@endif
 			</td>
 			<td>{{ $pedido->IdDocumento }}</td>
+			<td>{{ ($pedido->Situacion == 'Pendiente Recibir Material')? "situacion-pendiente" : "situacion-null" }}</td>
 			<td>{{ $pedido->NumeroDocumento }}</td>
-			<td>{{ (strlen($pedido->CLNombre)>20) ? substr($pedido->CLNombre, 0, 20)."..." : $pedido->CLNombre }}</td>
+			<td>{{ (strlen($pedido->CLNombre)>24) ? substr($pedido->CLNombre, 0, 24)."..." : $pedido->CLNombre }}</td>
 			<td>{{ explode(' ', $pedido->CLTelefono)[0] }}</td>
 		</tr>
 	@endforeach

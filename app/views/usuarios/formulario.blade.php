@@ -39,9 +39,10 @@
 			@if (isset($mensaje) && $mensaje['numero'] == "mensaje0")
 				@if ($mensaje['error'])
 					<div id="mensaje" class="error">
-					@foreach ($errores as $error)
-						<p>{{ $error }}</p>
-					@endforeach
+						<h4>Revise lo siguiente:</h4>
+						@foreach ($errores as $error)
+							<p>{{ $error }}</p>
+						@endforeach
 				@else
 					<div id="mensaje" class="exito">
 						<p>El nombre ha sido actualizado.</p>
@@ -60,9 +61,10 @@
 			@if (isset($mensaje) && $mensaje['numero'] == "mensaje1")
 				@if ($mensaje['error'])
 					<div id="mensaje" class="error">
-					@foreach ($errores as $error)
-						<p>{{ $error }}</p>
-					@endforeach
+					<h4>Revise lo siguiente:</h4>
+						@foreach ($errores as $error)
+							<p>{{ $error }}</p>
+						@endforeach
 				@else
 					<div id="mensaje" class="exito">
 						<p>El nombre del usuario ha sido actualizado.</p>
@@ -81,9 +83,10 @@
 			@if (isset($mensaje) && $mensaje['numero'] == "mensaje2")
 				@if ($mensaje['error'])
 					<div id="mensaje" class="error">
-					@foreach ($errores as $error)
-						<p>{{ $error }}</p>
-					@endforeach
+					<h4>Revise lo siguiente:</h4>
+						@foreach ($errores as $error)
+							<p>{{ $error }}</p>
+						@endforeach
 				@else
 					<div id="mensaje" class="exito">
 						<p>El rol del usuario ha sido actualizado.</p>
@@ -106,9 +109,10 @@
 			@if (isset($mensaje) && $mensaje['numero'] == "mensaje3")
 				@if ($mensaje['error'])
 					<div id="mensaje" class="error">
-					@foreach ($errores as $error)
-						<p>{{ $error }}</p>
-					@endforeach
+					<h4>Revise lo siguiente:</h4>
+						@foreach ($errores as $error)
+							<p>{{ $error }}</p>
+						@endforeach
 				@else
 					<div id="mensaje" class="exito">
 						<p>La contraseña del usuario ha sido actualizada.</p>
