@@ -1,13 +1,13 @@
 <?php 
 class EncuestasController extends BaseController {
 	public function listadoPreguntas() {
-		$preguntas = Pregunta::where('activa', 1)->get();
+		$preguntas = PreguntaEncuesta::where('activa', 1)->get();
 		
 		return View::make('encuestas.listado', array('preguntas' => $preguntas));
 	}
 
 	public function pregunta($pregunta_id) {
-		$pregunta = Pregunta::find($pregunta_id);
+		$pregunta = PreguntaEncuesta::find($pregunta_id);
 
 		$agrupacion = null;
 		$familia = null;
@@ -51,11 +51,11 @@ class EncuestasController extends BaseController {
 		$enviado = Input::get('borrar');
 
 		if($enviado == "borrar") {
-			$pregunta = Pregunta::find($pregunta_id);
+			$pregunta = PreguntaEncuesta::find($pregunta_id);
 			$pregunta->activa = 0;
 			$pregunta->save();
 
-			$preguntas = Pregunta::where('activa', 1)->get();
+			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
 		
 			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'exito' => 'Se ha eliminado el usuario con éxito'));
 		}
@@ -65,7 +65,7 @@ class EncuestasController extends BaseController {
 	}
 
 	public function editar($pregunta_id) {
-		$pregunta = Pregunta::find($pregunta_id);
+		$pregunta = PreguntaEncuesta::find($pregunta_id);
 
 		$agrupacion = null;
 		$familia = null;
@@ -170,7 +170,7 @@ class EncuestasController extends BaseController {
 			->withInput();
 		}
 		else {
-			Pregunta::create(array(
+			PreguntaEncuesta::create(array(
 				'texto'  => $datos['texto'],
 				'agrupacion_id' => ($datos['agrupacion_id'] == 0)? null : $datos['agrupacion_id'],
 				'familia_id' => ($datos['familia_id'] == 0)? null : $datos['familia_id'],
@@ -178,7 +178,7 @@ class EncuestasController extends BaseController {
 				'activa' => 1
 			));
 
-			$preguntas = Pregunta::where('activa', 1)->get();
+			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
 		
 			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'exito' => 'Se ha creado la pregunta con éxito'));
 		}

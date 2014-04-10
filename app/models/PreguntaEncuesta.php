@@ -1,5 +1,5 @@
 <?php 
-class Pregunta extends Eloquent {
+class PreguntaEncuesta extends Eloquent {
 	// Tabla con las preguntas
     protected $table = 'Preguntas';
 
