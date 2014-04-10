@@ -1,7 +1,7 @@
 <?php 
 class UsuariosController extends BaseController {
     public function mostrarTodos() {
-		$usuarios = Usuario::select('id', 'nombre', 'rol_id', 'usuario')->orderBy('nombre', 'desc')->get();
+		$usuarios = Usuario::select('id', 'nombre', 'rol_id', 'usuario')->orderBy('nombre', 'asc')->get();
 		
 		return View::make('usuarios.listado', array('usuarios' => $usuarios));
     }

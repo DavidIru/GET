@@ -11,8 +11,17 @@ class HomeController extends BaseController {
 	}
 
 	public function pruebas() {
-		$pedidos = Pedido::all();
-		return View::make('pruebas')->with("pedidos", $pedidos);
+		$pregunta = Pregunta::find(1);
+
+		$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
+    	$familias = Familia::orderBy('Familia', 'asc')->get();
+    	$subfamilias = Subfamilia::orderBy('Subfamilia', 'asc')->get();
+
+		$usuarios = Usuario::all();
+		return View::make('pruebas')->with("pregunta", $pregunta)
+		->with("agrupaciones", $agrupaciones)
+		->with("familias", $familias)
+		->with("subfamilias", $subfamilias);
 
 	}
 

@@ -81,22 +81,6 @@ nav
 	ul
 		margin 0
 		padding 0
-#add
-	background-color #f4f4f4
-	border 1px solid #ccc
-	border-radius 4px
-	color #333
-	display block
-	font-size 14px
-	margin 1em
-	padding .3em
-	text-decoration none
-	width 40%
-	span
-		margin-right .4em
-		text-shadow: 0 0 0 rgba(0, 0, 0, 1);
-	&:hover
-		background-color #e0e0e0
 #breadcrumbs
 	h3
 		border-bottom 1px solid #ccc
@@ -190,6 +174,22 @@ nav
 		border-color #d6e9c6
 		border-left-color #468847
 
+.boton-listado
+	background-color #f4f4f4
+	border 1px solid #ccc
+	border-radius 4px
+	color #333
+	display inline-block
+	font-size 14px
+	margin 1em 3%
+	padding .3em
+	text-decoration none
+	width 40%
+	span
+		margin-right .4em
+		text-shadow: 0 0 0 rgba(0, 0, 0, 1);
+	&:hover
+		background-color #e0e0e0
 /* Colores */
 .amarillo
 	color #FDF872
@@ -212,8 +212,12 @@ nav
 .verde-oscuro
 	color #64ab26
 
+.oculto
+	display none
+
 @import 'pedido'
-@import 'usuario'
+@import 'pregunta'
 @import 'tablas'
+@import 'usuario'
 
 	

@@ -25,7 +25,8 @@
 			</footer>
 		</div>
 	</div>
-	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
+	{{-- HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') --}}
+	{{ HTML::script('js/jquery.js') }}
 	@yield('scripts')
 	<script>
 		$(document).ready(function() {

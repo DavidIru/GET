@@ -112,7 +112,10 @@ return array(
 		'password' => 'contraseña',
 		'pass' => 'contraseña',
 		'pass2' => 'contraseña repetida',
-		'pass_ant' => 'contraseña antigua'
+		'pass_ant' => 'contraseña antigua',
+		'agrupacion_id' => 'familia agrupación',
+		'familia_id' => 'familia',
+		'subfamilia_id' => 'subfamilia'
 	),
 
 );

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titulo')
-	GET - Gestión de Usuarios
+	GET - Gestión de Encuestas
 @stop
 
 @section('estilos')
@@ -16,15 +16,18 @@
 		<h3>
 			<a href="{{ URL::to('/') }}" title="Volver a inicio">Inicio</a>
 			<span>></span>
-			<p>Gestionar usuarios</p>
+			<p>Gestionar encuestas</p>
 		</h3>
 	</div>
 @stop
 
 @section('contenido')
-	<h2>Listado de usuarios</h2>
-	<a href="{{ URL::to('usuario/add') }}" class="boton-listado">
-		<span class="icon-plus-circle verde-oscuro"></span>Añadir usuario
+	<h2>Listado de preguntas</h2>
+	<a href="{{ URL::to('encuestas/pregunta/add') }}" class="boton-listado">
+		<span class="icon-plus-circle verde-oscuro"></span>Añadir pregunta
+	</a>
+	<a href="#" class="boton-listado">
+		<span class="icon-search naranja"></span>Filtrar preguntas
 	</a>
 	@if(isset($exito))
 		<div id="mensaje" class="exito"><p>{{ $exito }}</p></div>
@@ -34,18 +37,14 @@
 			<thead>
 				<tr>
 					<th style="display: none">id</th>
-					<th>Nombre</th>
-					<th>Rol</th>
-					<th>Usuario</th>
+					<th>Pregunta</th>
 				</tr>
 			</thead>
 			<tbody>
-			@foreach ($usuarios as $usuario)
+			@foreach ($preguntas as $pregunta)
 				<tr>
-					<td>{{ $usuario->id }}</td>
-					<td>{{ $usuario->nombre }}</td>
-					<td>{{ $usuario->rol->rol }}</td>
-					<td>{{ $usuario->usuario }}</td>
+					<td>{{ $pregunta->id }}</td>
+					<td>{{ $pregunta->texto }}</td>
 				</tr>
 			@endforeach
 			</tbody>
@@ -68,7 +67,7 @@
 			});
 
 			$('#tabla tbody').on('click', "tr", function() {
-				$(location).attr('href',"{{ URL::to('usuario/" + $(this).data("id") + "') }}");
+				$(location).attr('href',"{{ URL::to('encuestas/pregunta/" + $(this).data("id") + "') }}");
 			});
 		});
 	</script>
