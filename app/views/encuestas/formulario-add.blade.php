@@ -67,7 +67,6 @@
 @stop
 
 @section('scripts')
-	{{ HTML::script('js/seguridad.password.js') }}
 	<script>
 		$(document).ready(function($) {
 			var familias = $('#familias');

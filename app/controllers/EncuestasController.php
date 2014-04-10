@@ -2,8 +2,40 @@
 class EncuestasController extends BaseController {
 	public function listadoPreguntas() {
 		$preguntas = PreguntaEncuesta::where('activa', 1)->get();
+		$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
+
+		return View::make('encuestas.listado', array('preguntas' => $preguntas, 'agrupaciones' => $agrupaciones));
+	}
+
+	public function listadoPreguntasFiltrado() {
+		$agrupacion = (Input::get('agrupacion') == 0)? null : Input::get('agrupacion');
+		$familia = (Input::get('familia') == 0)? null : Input::get('familia');
+		$subfamilia = (Input::get('subfamilia') == 0)? null : Input::get('subfamilia');
+		$filtro = true;
+
+		if($agrupacion == null) {
+			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
+			$filtro = false;
+		}
+		else {
+			if($familia == null) {
+				$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('activa', 1)->get();
+			}
+			else {
+				if($subfamilia == null) {
+					$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('familia_id', $familia)
+							->where('activa', 1)->get();
+				}
+				else {
+					$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('familia_id', $familia)
+							->where('subfamilia_id', $subfamilia)->where('activa', 1)->get();
+				}
+			}
+		}
 		
-		return View::make('encuestas.listado', array('preguntas' => $preguntas));
+		$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
+
+		return View::make('encuestas.listado', array('preguntas' => $preguntas, 'agrupaciones' => $agrupaciones, 'filtro' => $filtro));
 	}
 
 	public function pregunta($pregunta_id) {
@@ -18,15 +50,15 @@ class EncuestasController extends BaseController {
 
 		$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
 		if(!is_null($pregunta->agrupacion_id)) {
-			$agrupacion = FamiliasAgrupacion::find($pregunta->agrupacion_id)->AgrupacionFamilia;
+			$agrupacion = $pregunta->agrupacion->AgrupacionFamilia;
 			$familias = Familia::where('IdAgrupacion', $pregunta->agrupacion_id)
 							->orderBy('Familia', 'asc')->get();
 			if(!is_null($pregunta->familia_id)) {
-				$familia = Familia::find($pregunta->familia_id)->Familia;
+				$familia = $pregunta->familia->Familia;
 				$subfamilias = Subfamilia::where('IdFamilia', $pregunta->familia_id)
 							->orderBy('Subfamilia', 'asc')->get();
 				if(!is_null($pregunta->subfamilia_id)) {
-					$subfamilia = Subfamilia::find($pregunta->subfamilia_id)->Subfamilia;
+					$subfamilia = $pregunta->subfamilia->Subfamilia;
 				}
 			}
 		}
@@ -124,15 +156,15 @@ class EncuestasController extends BaseController {
 
 			$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
 			if(!is_null($pregunta->agrupacion_id)) {
-				$agrupacion = FamiliasAgrupacion::find($pregunta->agrupacion_id)->AgrupacionFamilia;
+				$agrupacion = $pregunta->agrupacion->AgrupacionFamilia;
 				$familias = Familia::where('IdAgrupacion', $pregunta->agrupacion_id)
 								->orderBy('Familia', 'asc')->get();
 				if(!is_null($pregunta->familia_id)) {
-					$familia = Familia::find($pregunta->familia_id)->Familia;
+					$familia = $pregunta->familia->Familia;
 					$subfamilias = Subfamilia::where('IdFamilia', $pregunta->familia_id)
 								->orderBy('Subfamilia', 'asc')->get();
 					if(!is_null($pregunta->subfamilia_id)) {
-						$subfamilia = Subfamilia::find($pregunta->subfamilia_id)->Subfamilia;
+						$subfamilia = $pregunta->subfamilia->Subfamilia;
 					}
 				}
 			}

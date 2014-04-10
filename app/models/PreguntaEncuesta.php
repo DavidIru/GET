@@ -14,4 +14,16 @@ class PreguntaEncuesta extends Eloquent {
     public function pedidos() {
     	return $this->belongsToMany('Pedidos', 'PreguntasEnvio', 'pedido_id', 'pregunta_id');
     }
+
+    public function agrupacion() {
+		return $this->belongsTo('FamiliasAgrupacion', 'agrupacion_id');
+	}
+
+	public function familia() {
+		return $this->belongsTo('Familia', 'familia_id');
+	}
+
+	public function subfamilia() {
+		return $this->belongsTo('Subfamilia', 'subfamilia_id');
+	}
 }

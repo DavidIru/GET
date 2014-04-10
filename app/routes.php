@@ -53,7 +53,8 @@ Route::group(array('before' => 'auth'), function()
 
 		Route::group(array('before' => 'rol_vendedor'), function()
 		{
-		    Route::post('encuestas/pregunta/{id}', 'EncuestasController@editar')
+		    Route::post('encuestas', 'EncuestasController@listadoPreguntasFiltrado');
+			Route::post('encuestas/pregunta/{id}', 'EncuestasController@editar')
 		    	->where('id', '[0-9]+');
 		    Route::post('encuestas/pregunta/{id}/eliminar', 'EncuestasController@eliminar')
 		    	->where('id', '[0-9]+');
