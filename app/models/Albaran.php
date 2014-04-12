@@ -6,4 +6,3 @@ class Albaran extends Eloquent {
 
     public $timestamps = false;
 }
-?>

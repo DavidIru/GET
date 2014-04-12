@@ -111,6 +111,7 @@ class UsuariosController extends BaseController {
         );
 
         $validacion = array(
+        	'pass_ant' => array('required'),
         	Hash::make('pass_ant') => array('exists:Usuarios,password,id,'.Auth::user()->id),
     		'pass' => array('required', 'min:4', 'max:64', 'same:pass2')
     	);

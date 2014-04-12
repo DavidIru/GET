@@ -40,7 +40,7 @@
 		<tbody>
 		@foreach ($pedidos as $pedido)
 			<tr>
-				<td>{{ $pedido->IdDocumento }}</td>
+				<td style="display: none">{{ $pedido->IdDocumento }}</td>
 				<td>{{ $pedido->NumeroDocumento }}</td>
 				<td>{{ (strlen($pedido->CLNombre)>20) ? substr($pedido->CLNombre, 0, 20)."..." : $pedido->CLNombre }}</td>
 				<td>{{ substr($pedido->CLTelefono, 0, 9) }}</td>

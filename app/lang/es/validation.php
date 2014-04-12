@@ -108,14 +108,15 @@ return array(
 	*/
 
 	'attributes' => array(
-		'username' => 'usuario',
-		'password' => 'contraseña',
+		'agrupacion_id' => 'familia agrupación',
+		'familia_id' => 'familia',
 		'pass' => 'contraseña',
 		'pass2' => 'contraseña repetida',
 		'pass_ant' => 'contraseña antigua',
-		'agrupacion_id' => 'familia agrupación',
-		'familia_id' => 'familia',
-		'subfamilia_id' => 'subfamilia'
+		'pass_ant' => 'contraseña antigua',
+		'password' => 'contraseña',
+		'subfamilia_id' => 'subfamilia',
+		'username' => 'usuario'
 	),
 
 );

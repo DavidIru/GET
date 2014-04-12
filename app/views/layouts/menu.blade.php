@@ -16,7 +16,7 @@
 	<h2>Acciones de administración</h2>
 	<ul>
 		<li><a href="{{ URL::to('usuarios')}}" title="Gestionar usuarios"><span class="icon-users morado"></span>Gestionar usuarios</a></li>
-		<li><a href="#" title="Gestionar mensajes"><span class="icon-envelope azul-claro"></span>Mensajes por defecto</a></li>
+		<li><a href="{{ URL::to('mensajes')}}" title="Gestionar mensajes"><span class="icon-envelope azul-claro"></span>Mensajes por defecto</a></li>
 	</ul>
 	@endif
 	<h2>Usuario</h2>

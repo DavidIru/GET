@@ -60,7 +60,7 @@
 		<table id="tabla">
 			<thead>
 				<tr>
-					<th style="display: none">id</th>
+					<th>ID</th>
 					<th>Pregunta</th>
 				</tr>
 			</thead>
