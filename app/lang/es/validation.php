@@ -61,7 +61,7 @@ return array(
 	"not_in"         => "El campo :attribute seleccionado es inválido.",
 	"numeric"        => "El campo :attribute debe ser un número.",
 	"regex"          => "El campo :attribute tiene un formato inválido.",
-	"required"       => "El campo :attribute es requerido",
+	"required"       => "El campo :attribute es requerido.",
 	"required_if"      => "El campo :attribute es requerido cuando el campo :other es :value.",
 	"required_with"    => "El campo :attribute es requerido con los valores :values.",
 	"required_without" => "El campo :attribute es requerido sin los valores :values.",
@@ -116,7 +116,9 @@ return array(
 		'pass_ant' => 'contraseña antigua',
 		'password' => 'contraseña',
 		'subfamilia_id' => 'subfamilia',
-		'username' => 'usuario'
+		'username' => 'usuario',
+		'telefono' => 'teléfono',
+		'email' => 'e-mail'
 	),
 
 );

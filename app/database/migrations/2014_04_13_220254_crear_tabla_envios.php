@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaMensajes extends Migration {
+class CrearTablaEnvios extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,15 @@ class CrearTablaMensajes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Mensajes', function($table)
+		Schema::create('Envios', function($table)
         {
             $table->increments('id');
             
-            $table->integer('tipo_id');
-            $table->string('texto', 140);
+            $table->integer('pedido_id');
+            $table->boolean('entregado')->default(0);
+            $table->string('url', 200)->unique();
+            $table->boolean('avisar');
+            $table->string('telefono', 20);
             
             $table->timestamps();
         });
@@ -30,7 +33,7 @@ class CrearTablaMensajes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Mensajes');
+		Schema::drop('Envios');
 	}
 
 }

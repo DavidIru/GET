@@ -1,7 +1,7 @@
 <?php 
 class PedidosController extends BaseController {
 
-    public function inicial() {
+    public function listado() {
         $pedidos = Pedido::select('IdDocumento', 'NumeroDocumento', 'CLNombre', 'CLTelefono')->orderBy('IdDocumento', 'desc')->take(100)->get();
 
         return View::make('pedidos.listado', array('pedidos' => $pedidos, 'todos' => false));

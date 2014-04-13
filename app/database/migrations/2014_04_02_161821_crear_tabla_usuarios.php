@@ -20,6 +20,7 @@ class CrearTablaUsuarios extends Migration {
             $table->string('nombre', 100);
             $table->string('usuario', 50)->unique();
             $table->string('password', 64);
+            $table->integer('notificaciones')->default(0);
             
             $table->timestamps();
         });

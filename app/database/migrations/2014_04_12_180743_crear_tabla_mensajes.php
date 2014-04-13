@@ -17,7 +17,7 @@ class CrearTablaMensajes extends Migration {
             $table->increments('id');
             
             $table->integer('tipo_id');
-            $table->string('texto', 100);
+            $table->string('texto', 140);
             
             $table->timestamps();
         });

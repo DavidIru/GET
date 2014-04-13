@@ -15,7 +15,7 @@
 		<span class="icon-menu"></span>
 	</header>
 	<div id="contenedor">
-		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id))
+		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id, 'notificaciones' => Auth::user()->notificaciones))
 		
 		<div id="contenido">
 			@yield('breadcrumb')

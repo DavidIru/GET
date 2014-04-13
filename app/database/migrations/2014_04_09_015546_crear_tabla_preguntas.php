@@ -20,7 +20,7 @@ class CrearTablaPreguntas extends Migration {
             $table->integer('familia_id')->nullable();
             $table->integer('subfamilia_id')->nullable();
             $table->string('texto', 200);
-            $table->boolean('activa');
+            $table->boolean('activa')->default(1);
             
             $table->timestamps();
         });
