@@ -44,8 +44,9 @@ Route::group(array('before' => 'auth'), function()
 		// Editamos un pedido concreto
 		Route::get('pedido/{id}', 'PedidosController@detalles')
 			->where('id', '[0-9]+');
-			
-		Route::get('encuestas', 'EncuestasController@listadoPreguntas');
+		
+		Route::get('encuestas/resultados', 'EncuestasController@resultados');	
+		Route::get('encuestas/preguntas', 'EncuestasController@listadoPreguntas');
 		Route::get('encuestas/pregunta/{id}', 'EncuestasController@pregunta')
 			->where('id', '[0-9]+');
 		Route::get('encuestas/pregunta/add', 'EncuestasController@formularioAdd');
@@ -54,6 +55,7 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('promociones/cliente/{id}', 'PromocionesController@cliente')
 			->where('id', '[0-9]+');
 		Route::get('promociones/cliente/add', 'PromocionesController@formularioAdd');
+		Route::get('promociones/enviar', 'PromocionesController@formularioEnviar');
 	});
 
 	Route::group(array('before' => 'csrf'), function()
@@ -80,6 +82,11 @@ Route::group(array('before' => 'auth'), function()
 			Route::post('encuestas/pregunta/add', 'EncuestasController@add');
 
 			Route::post('promociones/cliente/add', 'PromocionesController@add');
+			Route::post('promociones/cliente/{id}', 'PromocionesController@editar')
+			->where('id', '[0-9]+');
+			Route::post('promociones/cliente/{id}/eliminar', 'PromocionesController@eliminar')
+				->where('id', '[0-9]+');
+			Route::post('promociones/enviar', 'PromocionesController@enviar');
 		});
 		
 		Route::post('perfil', 'UsuariosController@editarPerfil');

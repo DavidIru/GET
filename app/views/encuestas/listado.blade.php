@@ -16,17 +16,22 @@
 		<h3>
 			<a href="{{ URL::to('/') }}" title="Volver a inicio">Inicio</a>
 			<span>></span>
-			<p>Gestionar encuestas</p>
+			<p>Encuestas - Preguntas</p>
 		</h3>
+	</div>
+@stop
+
+@section('acciones')
+	<div id="acciones">
+		<a href="{{ URL::to('encuestas/pregunta/add') }}" title="Añadir pregunta">
+			<span class="icon-plus-circle verde-oscuro"></span>Añadir pregunta
+		</a>
 	</div>
 @stop
 
 @section('contenido')
 	<h2>Listado de preguntas{{ (isset($filtro) && $filtro)? " filtrado" : '' }}</h2>
-	<a href="{{ URL::to('encuestas/pregunta/add') }}" class="boton-listado">
-		<span class="icon-plus-circle verde-oscuro"></span>Añadir pregunta
-	</a>
-	<a href="#" class="boton-listado" id="boton-filtrar">
+	<a href="#" class="boton-listado" id="boton-filtrar" title="Filtrar preguntas">
 		<span class="icon-search naranja"></span>Filtrar preguntas
 	</a>
 	<div id="filtro">

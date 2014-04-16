@@ -21,11 +21,16 @@
 	</div>
 @stop
 
+@section('acciones')
+	<div id="acciones">
+		<a href="{{ URL::to('usuario/add') }}" title="Añadir usuario">
+			<span class="icon-plus-circle verde-oscuro"></span>Añadir usuario
+		</a>
+	</div>
+@stop
+
 @section('contenido')
 	<h2>Listado de usuarios</h2>
-	<a href="{{ URL::to('usuario/add') }}" class="boton-listado">
-		<span class="icon-plus-circle verde-oscuro"></span>Añadir usuario
-	</a>
 	@if(isset($exito))
 		<div id="mensaje" class="exito"><p>{{ $exito }}</p></div>
 	@endif

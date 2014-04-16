@@ -16,7 +16,7 @@
 		<h3>
 			<a href="{{ URL::to('/')}}" title="Volver al inicio">Inicio</a>
 			<span>></span>
-			<a href="{{ URL::to('encuestas')}}" title="Volver a Gestionar encuestas">Gestionar encuestas</a>
+			<a href="{{ URL::to('encuestas/preguntas')}}" title="Volver a Encuestas - Preguntas">Encuestas - Preguntas</a>
 			<span>></span>
 			<p>Pregunta {{ $pregunta->id }}</p>
 		</h3>

@@ -19,6 +19,7 @@
 		
 		<div id="contenido">
 			@yield('breadcrumb')
+			@yield('acciones')
 			@yield('contenido')
 			<footer>
 				@yield('footer')
@@ -31,6 +32,7 @@
 	<script>
 		$(document).ready(function() {
 			var desplegado = false;
+			var encuestas = false;
 			$('header span').on('click', function() {
 				if(desplegado) {
 					$("#contenido").animate({ "margin-left": "0"}, 500, "linear");
@@ -42,6 +44,16 @@
 					$("#contenido").css("overflow", "hidden");
 					//$("nav").animate({"z-index": "3"});
 					desplegado = true;
+				}
+			});
+
+			$('#btn-encuestas').on('click', function() {
+				if(encuestas) {
+					$('#menu-encuestas').animate({ "height": "2.25em"}, 500, "linear");
+					encuestas = false;
+				} else {
+					$('#menu-encuestas').animate({ "height": "7.5em"}, 500, "linear");
+					encuestas = true;
 				}
 			});
 		});

@@ -67,8 +67,6 @@
 	{{ HTML::script('js/jquery.maxlength.min.js') }}
 	<script>
 		$(document).ready(function() {
-			var contador = 100;
-			var restantes = $('#restantes');
 			$('#botones a').on('click', function(e) {
 				e.preventDefault();
 				var texto = $('#texto');

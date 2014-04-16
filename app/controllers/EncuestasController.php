@@ -215,4 +215,8 @@ class EncuestasController extends BaseController {
 			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'exito' => 'Se ha creado la pregunta con éxito'));
 		}
 	}
+
+	public function resultados() {
+		echo "a";
+	}
 }

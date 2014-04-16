@@ -31,7 +31,7 @@
 				<span>{{ date("d/m/Y", strtotime($pedido->FechaDocumento)) }}</span>
 			</h2>
 			<h3>{{ $pedido->NumeroDocumento }}</h3>
-			<p><strong>Situación:</strong> {{ (strlen($pedido->Situacion) == 0)? "Desconocida" : $pedido->Situacion }}</p>
+			<p><strong>Situación:</strong> {{ (strlen($pedido->Situacion) == 0)? "Preparado para envío" : $pedido->Situacion }}</p>
 			<h4>
 				<span>Cliente:</span>{{ $pedido->CLNombre }}
 			</h4>

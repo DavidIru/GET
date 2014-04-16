@@ -8,7 +8,13 @@
 		<li><a href="{{ URL::to('envios') }}" title="Gestionar envíos"><span class="icon-truck verde"></span>Envíos</a></li>
 		@if ($rol_id == 1 || $rol_id == 2)
 		<li><a href="{{ URL::to('promociones') }}" title="Gestionar promociones"><span class="icon-tags rosa"></span>Promociones</a></li>
-		<li><a href="{{ URL::to('encuestas') }}" title="Gestionar encuestas"><span class="icon-copy azul"></span>Encuestas</a></li>
+		<li id="menu-encuestas">
+			<p id="btn-encuestas"><span class="icon-copy azul"></span>Encuestas</p>
+			<ul>
+				<li><a href="{{ URL::to('encuestas/resultados') }}" title="Analizar resultados"><span class="icon-chart azul"></span>Analizar resultados</a></li>
+				<li><a href="{{ URL::to('encuestas/preguntas') }}" title="Listado de preguntas"><span class="icon-comments azul"></span>Listado de preguntas</a></li>
+			</ul>
+		</li>
 		@endif
 		<li>
 			<a href="#" title="Gestionar notificaciones">

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titulo')
-	GET - Añadir pregunta
+	GET - Inscribir cliente
 @stop
 
 @section('estilos')
@@ -24,8 +24,8 @@
 @stop
 
 @section('contenido')
-	<section id="usuario">
-		<div id="usuarioadd">
+	<section id="cliente">
+		<div id="clienteadd">
 			<h2>Inscripción de nuevo cliente</h2>
 			<p>Introduzca los datos para la inscripción de un nuevo cliente en la lista de promociones.</p>
 			@if (isset($errors) && !empty($errors->all()))

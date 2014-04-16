@@ -21,14 +21,20 @@
 	</div>
 @stop
 
+@section('acciones')
+	<div id="acciones">
+		<a href="{{ URL::to('promociones/cliente/add') }}" title="Inscribir cliente">
+		<span class="icon-plus-circle verde-oscuro"></span>Inscribir cliente
+		</a>
+		<p>|</p>
+		<a href="{{ URL::to('promociones/enviar') }}" title="Enviar promoción">
+			<span class="icon-paperplane blanco"></span>Enviar promoción
+		</a>
+	</div>
+@stop
+
 @section('contenido')
 	<h2>Listado de clientes inscritos</h2>
-	<a href="{{ URL::to('promociones/cliente/add') }}" class="boton-listado">
-		<span class="icon-plus-circle verde-oscuro"></span>Inscribir cliente
-	</a>
-	<a href="#" class="boton-listado" id="boton-filtrar">
-		<span class="icon-paperplane gris"></span>Enviar promoción
-	</a>
 	@if(isset($exito))
 		<div id="mensaje" class="exito"><p>{{ $exito }}</p></div>
 	@endif
