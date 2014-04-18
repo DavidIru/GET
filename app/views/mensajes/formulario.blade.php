@@ -65,8 +65,10 @@
 
 @section('scripts')
 	{{ HTML::script('js/jquery.maxlength.min.js') }}
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 			$('#botones a').on('click', function(e) {
 				e.preventDefault();
 				var texto = $('#texto');

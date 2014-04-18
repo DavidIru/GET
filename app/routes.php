@@ -44,6 +44,15 @@ Route::group(array('before' => 'auth'), function()
 		// Editamos un pedido concreto
 		Route::get('pedido/{id}', 'PedidosController@detalles')
 			->where('id', '[0-9]+');
+		Route::get('pedido/{id}/programar', 'PedidosController@verProgramar')
+			->where('id', '[0-9]+');
+
+		Route::get('envio/{id}', 'EnviosController@detalles')
+			->where('id', '[0-9]+');
+		Route::get('envio/{id}/programar', 'EnviosController@verProgramar')
+			->where('id', '[0-9]+');
+		Route::get('envio/{id}/entregado', 'EnviosController@entregado')
+			->where('id', '[0-9]+');
 		
 		Route::get('encuestas/resultados', 'EncuestasController@resultados');	
 		Route::get('encuestas/preguntas', 'EncuestasController@listadoPreguntas');
@@ -83,10 +92,18 @@ Route::group(array('before' => 'auth'), function()
 
 			Route::post('promociones/cliente/add', 'PromocionesController@add');
 			Route::post('promociones/cliente/{id}', 'PromocionesController@editar')
-			->where('id', '[0-9]+');
+				->where('id', '[0-9]+');
 			Route::post('promociones/cliente/{id}/eliminar', 'PromocionesController@eliminar')
 				->where('id', '[0-9]+');
 			Route::post('promociones/enviar', 'PromocionesController@enviar');
+
+			Route::post('envio/{id}/programar', 'EnviosController@programar')
+				->where('id', '[0-9]+');
+			Route::post('envio/{id}/cancelar', 'EnviosController@cancelar')
+				->where('id', '[0-9]+');
+
+			Route::post('pedido/{id}/programar', 'PedidosController@programar')
+				->where('id', '[0-9]+');
 		});
 		
 		Route::post('perfil', 'UsuariosController@editarPerfil');

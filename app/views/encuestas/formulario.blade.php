@@ -128,8 +128,10 @@
 @stop
 
 @section('scripts')
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
 		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 			var familias = $('#familias');
 			var subfamilias = $('#subfamilias');
 			$('#agrupacion').change(function(e) {

@@ -41,7 +41,10 @@
 		</div>
 	{{ Form::close() }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 		$(document).ready(function() {
 			$('.loader').fadeTo(400, 0);
 			$('figure').animate({"margin-top": "2em"}, 1500);

@@ -26,33 +26,40 @@
 @section('contenido')
 	<section id="pedido">
 		<div id="pedidodatos">
+			@if ($exito)
+				<div id="mensaje" class="exito">
+					<p class="exito-formulario">Se ha cancelado el envío con éxito</p>
+				</div>
+			@endif
 			<h2>
 				Datos del pedido
 				<span>{{ date("d/m/Y", strtotime($pedido->FechaDocumento)) }}</span>
 			</h2>
 			<h3>{{ $pedido->NumeroDocumento }}</h3>
 			<p><strong>Situación:</strong> {{ (strlen($pedido->Situacion) == 0)? "Preparado para envío" : $pedido->Situacion }}</p>
-			<h4>
+			<h4{{ (strlen($pedido->Situacion) != 0)? ' style="width: auto;"' : '' }}>
 				<span>Cliente:</span>{{ $pedido->CLNombre }}
 			</h4>
-			<div id="cuando">
-				<h4>Entrega programada</h4>
-				@if($pedido->Situacion == "Entregado")
-					<p class="unico">El pedido ya ha sido entregado</p>
-				@else
-					@if($pedido->FechaEntrega == NULL)
-						<p>No hay fecha de entrega</p>
+			@if(strlen($pedido->Situacion) == 0)
+				<div id="cuando">
+					<h4>Entrega programada</h4>
+					@if($pedido->Situacion == "Entregado")
+						<p class="unico">El pedido ya ha sido entregado</p>
 					@else
-						<p>Fecha: {{ date("d/m/Y", strtotime($pedido->FechaEntrega)) }}</p>
+						@if($pedido->FechaEntrega == NULL)
+							<p>No hay fecha de entrega</p>
+						@else
+							<p>Fecha: {{ date("d/m/Y", strtotime($pedido->FechaEntrega)) }}</p>
+						@endif
+						@if($pedido->HoraEntrega == NULL)
+							<p>No hay hora de entrega</p>
+						@else
+							<p>Hora: {{ date("H:i", strtotime($pedido->HoraEntrega)) }}h</p>
+						@endif
+						<a href="{{ URL::to('pedido/'.$pedido->IdDocumento.'/programar')}}">{{ ($pedido->FechaEntrega == NULL && $pedido->HoraEntrega == NULL)? "Programar envío" : "Editar envío" }}</a>
 					@endif
-					@if($pedido->HoraEntrega == NULL)
-						<p>No hay hora de entrega</p>
-					@else
-						<p>Hora: {{ date("H:i", strtotime($pedido->HoraEntrega)) }}h</p>
-					@endif
-					<a href="#">Editar envío</a>
-				@endif
-			</div>
+				</div>
+			@endif
 		</div>
 		<div id="pedidoenvio">
 			<h2>Datos del envío</h2>
@@ -97,8 +104,10 @@
 	{{ HTML::script('//maps.google.com/maps/api/js?sensor=true') }}
 	{{ HTML::script('js/jquery.ui.map.full.min.js') }}
 	{{ HTML::script('js/jquery.dynatable.js') }}
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 			var url = "{{ 'http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode(stripslashes($pedido->CLDireccionEnvio." ".$pedido->CLCiudadEnvio." ".$pedido->CLProvinciaEnvio)).'&sensor=false' }}";
 			$.getJSON(url, function(data) {
 				console.log(data);

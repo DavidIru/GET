@@ -6,6 +6,15 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 	<title>@yield('titulo', 'GET')</title>
 	@yield('estilos')
+	<!--[if lt IE 9]>
+		<script type="text/javascript">
+		   document.createElement("nav");
+		   document.createElement("header");
+		   document.createElement("footer");
+		   document.createElement("section");
+		   document.createElement("article");
+		</script>
+	<![endif]-->
 </head>
 <body>
 	<header>
@@ -26,6 +35,7 @@
 			</footer>
 		</div>
 	</div>
+	{{ HTML::script('js/modernizr.min.js') }}
 	{{-- HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') --}}
 	{{ HTML::script('js/jquery.js') }}
 	@yield('scripts')

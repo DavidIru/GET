@@ -87,8 +87,10 @@
 	{{ HTML::script('js/redactor/plugins/fontsize.js') }}
 	{{ HTML::script('js/redactor/plugins/fontfamily.js') }}
 	{{ HTML::script('js/jquery.maxlength.min.js') }}
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 			$('#textmail').redactor({
 				boldTag: 'strong',
 				italicTag: 'em',

@@ -90,3 +90,12 @@
 		</div>
 	</section>
 @stop
+
+@section('scripts')
+	{{ HTML::script('js/jquery.placeholder.js') }}
+	<script>
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
+		});
+	</script>
+@stop

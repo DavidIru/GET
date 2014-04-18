@@ -16,7 +16,7 @@ class CrearTablaPreguntasEnvio extends Migration {
         {
             $table->increments('id');
             
-            $table->integer('pedido_id');
+            $table->integer('encuesta_id');
             $table->integer('pregunta_id');
             $table->integer('resultado');
             

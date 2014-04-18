@@ -2,10 +2,10 @@
 
 class HomeController extends BaseController {
 	public function inicial() {
-		$pedidos = Pedido::whereNull('Situacion')
-							->orWhere('Situacion', '!=', 'Entregado', 'AND')
-							->where('Situacion', '!=', 'Anulado', 'AND')
-							->where('Situacion', '!=', 'PRESUPUESTO')
+		$pedidos = Pedido::select('IdDocumento', 'NumeroDocumento', 'CLNombre', 'CLTelefono', 'Situacion')
+							->whereNotIn('Situacion', array('Entregado', 'Anulado', 'PRESUPUESTO'))
+							->orwhereNull('Situacion')
+							->whereRaw('(FechaEntrega is NULL or HoraEntrega is NULL)')
 							->orderBy('FechaDocumento', 'asc')->get();
 		return View::make('home', array('pedidos' => $pedidos));
 	}

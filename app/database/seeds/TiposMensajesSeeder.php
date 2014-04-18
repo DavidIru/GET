@@ -11,6 +11,10 @@ class TiposMensajesSeeder extends Seeder {
         TiposMensaje::create(array(
             'nombre' => 'SMS Pedido Entregado'
         ));
+
+        TiposMensaje::create(array(
+            'nombre' => 'SMS Pedido Cancelado'
+        ));
     }
  
 }

@@ -66,8 +66,10 @@
 
 @section('scripts')
 	{{ HTML::script('js/seguridad.password.js') }}
+	{{ HTML::script('js/jquery.placeholder.js') }}
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function($) {
+			$('input, textarea').placeholder();
 			$('#pass').on('keyup', function() {
 				var nivel = seguridad_clave($(this).val());
 				var relleno = $('#relleno');
