@@ -2,6 +2,9 @@
 // Mostramos el formulario de login
 Route::get('login', 'AuthController@verLogin');
 
+Route::get('encuesta/{numero}', 'EncuestasController@verEncuesta')
+	->where('numero', '[0-9a-z]+');
+
 Route::group(array('before' => 'csrf'), function()
 {
 	// Validamos los datos de inicio de sesión
@@ -69,6 +72,9 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::group(array('before' => 'csrf'), function()
 	{
+		Route::post('encuesta/{numero}', 'EncuestasController@procesarEncuesta')
+			->where('numero', '[0-9a-z]+');
+
 		Route::group(array('before' => 'rol_admin'), function()
 		{
 			Route::post('usuario/{id}', 'UsuariosController@editar')

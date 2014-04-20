@@ -11,8 +11,8 @@ class PreguntaEncuesta extends Eloquent {
 
     protected $guarded = array();
 
-    public function pedidos() {
-    	return $this->belongsToMany('Pedidos', 'PreguntasEnvio', 'pedido_id', 'pregunta_id');
+    public function encuestas() {
+    	return $this->belongsToMany('Encuestas', 'PreguntasEnvio', 'encuesta_id', 'pregunta_id');
     }
 
     public function agrupacion() {

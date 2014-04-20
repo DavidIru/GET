@@ -88,8 +88,9 @@ class EncuestasController extends BaseController {
 			$pregunta->save();
 
 			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
-		
-			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'exito' => 'Se ha eliminado el usuario con éxito'));
+			$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
+
+			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'agrupaciones' => $agrupaciones, 'exito' => 'Se ha eliminado la pregunta con éxito'));
 		}
 		else {
 			return Redirect::to('encuestas');
@@ -211,12 +212,59 @@ class EncuestasController extends BaseController {
 			));
 
 			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
-		
-			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'exito' => 'Se ha creado la pregunta con éxito'));
+			$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
+
+			return View::make('encuestas.listado', array('preguntas' => $preguntas, 'agrupaciones' => $agrupaciones, 'exito' => 'Se ha creado la pregunta con éxito'));
 		}
 	}
 
 	public function resultados() {
 		echo "a";
+	}
+
+	public function verEncuesta($numero) {
+		$encuesta = Encuesta::where('url', 'encuesta/'.$numero)
+						->where('respondida', 0)
+						->firstOrFail();
+
+		return View::make('encuestas.preguntas', array('encuesta' => $encuesta));
+	}
+
+	public function procesarEncuesta($numero) {
+		$encuesta = Encuesta::where('url', 'encuesta/'.$numero)->firstOrFail();
+		$preguntas = $encuesta->preguntas;
+
+		$datos = array();
+		$validacion = array();
+		foreach($preguntas as $preguntaEnv) {
+			$datos[$preguntaEnv->pregunta->id] =Input::get($preguntaEnv->pregunta->id);
+			$validacion[$preguntaEnv->pregunta->id] = array('required', 'in:0,1,2,3,4,5,6,7,8,9,10');
+		}
+		$datos['comentario'] = Input::get('comentario');
+		$validacion = Validator::make($datos, $validacion);
+		 
+		if($validacion->fails()) {
+			return Redirect::to('encuesta/'.$numero)
+			->withErrors($validacion)
+			->withInput();
+		}
+		else {
+			//Guardamos los datos
+			foreach($preguntas as $preguntaEnv) {
+				$preguntaEnv->resultado = $datos[$preguntaEnv->pregunta->id];
+				$preguntaEnv->save();
+			}
+			if(strlen($datos['comentario']) > 0) {
+				Comentario::create(array(
+					'encuesta_id'  => $encuesta->id,
+					'comentario' => $datos['comentario']
+				));
+			}
+
+			$encuesta->respondida = 1;
+			$encuesta->save();
+
+			return View::make('encuestas.respondida', array('encuesta' => $encuesta));
+		}
 	}
 }

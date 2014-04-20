@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaEncuestas extends Migration {
+class CrearTablaComentarios extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,12 @@ class CrearTablaEncuestas extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Encuestas', function($table)
+		Schema::create('Comentarios', function($table)
         {
             $table->increments('id');
             
-            $table->integer('pedido_id');
-            $table->string('url', 100);
-            $table->boolean('respondida', 0)
+            $table->integer('encuesta_id');
+            $table->longText('comentario');
             
             $table->timestamps();
         });
@@ -31,7 +30,7 @@ class CrearTablaEncuestas extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Encuestas');
+		Schema::drop('Comentarios');
 	}
 
 }

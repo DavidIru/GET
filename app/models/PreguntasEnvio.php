@@ -1,10 +1,16 @@
 <?php 
-class Pregunta extends Eloquent {
+class PreguntasEnvio extends Eloquent {
 	// Tabla con las preguntas
-    protected $table = 'Preguntas';
+    protected $table = 'PreguntasEnvio';
 
-    public function pedidos() {
-    	return $this->belongsToMany('Pedidos', 'PreguntasEnvio', 'pedido_id', 'pregunta_id');
-    }
+    protected $guarded = array('id');
+
+    public function pregunta() {
+		return $this->belongsTo('PreguntaEncuesta', 'pregunta_id');
+	}
+
+	public function encuesta() {
+		return $this->belongsTo('Encuesta', 'encuesta_id');
+	}
 }
 ?>

@@ -7,8 +7,11 @@ class Pedido extends Eloquent {
 
     public $timestamps = false;
 
-    public function preguntas() {
-    	return $this->belongsToMany('Preguntas', 'PreguntasEnvio', 'pregunta_id', 'pedido_id');
+    public function encuesta()
+    {
+		return $this->hasOne('Encuesta', 'pedido_id');
     }
+
+    
 }
 ?>

@@ -43,7 +43,7 @@
 				<td style="display: none">{{ $pedido->IdDocumento }}</td>
 				<td>{{ $pedido->NumeroDocumento }}</td>
 				<td>{{ (strlen($pedido->CLNombre)>20) ? substr($pedido->CLNombre, 0, 20)."..." : $pedido->CLNombre }}</td>
-				<td>{{ substr($pedido->CLTelefono, 0, 9) }}</td>
+				<td>{{ substr(str_replace(' ', '', $pedido->CLTelefono), 0, 9) }}</td>
 			</tr>
 		@endforeach
 		</tbody>
