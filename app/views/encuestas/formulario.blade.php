@@ -41,6 +41,7 @@
 				Todos los productos
 			@endif
 			</h3>
+			<h3><strong>Nota media de la pregunta:</strong> {{ number_format($pregunta->media,2) }} / 10</h3>
 			<h4><strong>Creación:</strong> {{ date("d/m/Y H:i", strtotime($pregunta->created_at)) }}h</h4>
 			<h4><strong>Último cambio:</strong> {{ ($pregunta->updated_at == $pregunta->created_at)? "No ha habido cambios" : date("d/m/Y H:i", strtotime($pregunta->updated_at))."h" }}</h4>
 		</div>

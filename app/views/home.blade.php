@@ -35,8 +35,8 @@
 	@foreach ($pedidos as $pedido)
 		<tr>
 			</td>
-			<td>{{ $pedido->IdDocumento }}</td>
-			<td>{{ ($pedido->Situacion == 'Pendiente Recibir Material')? "situacion-pendiente" : "situacion-null" }}</td>
+			<td style="display: none">{{ $pedido->IdDocumento }}</td>
+			<td style="display: none">{{ ($pedido->Situacion == 'Pendiente Recibir Material')? "situacion-pendiente" : "situacion-null" }}</td>
 			<td>{{ $pedido->NumeroDocumento }}</td>
 			<td>{{ (strlen($pedido->CLNombre)>24) ? substr($pedido->CLNombre, 0, 24)."..." : $pedido->CLNombre }}</td>
 			<td>{{ explode(' ', $pedido->CLTelefono)[0] }}</td>

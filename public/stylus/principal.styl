@@ -52,6 +52,7 @@ nav
 			background-color #a02525
 			border-radius 100%
 			box-shadow 1px 1px 1px rgba(0, 0, 0, 1)
+			color #fff
 			display inline-block
 			font-size 10px
 			font-weight 900
@@ -79,7 +80,6 @@ nav
 		padding 0
 		width anchura_menu
 		a
-		p
 			border-top: solid 1px #434754
 			color #fff
 			display block
@@ -93,7 +93,6 @@ nav
 			text-shadow 1px 1px 1px rgba(0, 0, 0, 1)
 			span
 				padding 0.5em
-		p
 			&:hover
 				cursor pointer
 		&:first-child
@@ -153,7 +152,10 @@ nav
 				text-decoration underline
 		span
 			font-weight 300
-
+#chart
+	width 90%
+	margin 0 auto
+	height 300px
 #contenedor
 	border-top 1px solid #000
 	bottom 0
@@ -276,6 +278,7 @@ nav
 	display none
 
 @import 'clientepromocion'
+@import 'comentario'
 @import 'envio'
 @import 'mensaje'
 @import 'pedido'

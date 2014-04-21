@@ -1,91 +1,88 @@
-
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>PRUEBAS</title>
 	{{ HTML::style('css/principal.css') }}
 	<!--[if lt IE 8]><!-->
 	{{ HTML::style('css/ie7.css') }}
 	<!--<![endif]-->
-	
-	{{ Form::open() }}
-		<label for="agrupacion">Familia agrupación</label>
-		<select id="agrupacion" name="agrupacion">
-			<option value="0"{{ (is_null($pregunta->agrupacion_id))? 'selected="selected"' : '' }}>Todas</option>
-		@foreach ($agrupaciones as $agrupacion)
-			<option value="{{ $agrupacion->IdAgrupacion }}"{{ ($agrupacion->IdAgrupacion == $pregunta->agrupacion_id)? 'selected="selected"' : '' }}>{{ $agrupacion->AgrupacionFamilia }}</option>
-		@endforeach
-		</select>
-		<div id="familias">
-			<label for="familia">Familia</label>
-			<select id="familia" name="familia"{{ (is_null($pregunta->agrupacion_id))? 'class="oculto"' : '' }}>
-				<option value="0"{{ (is_null($pregunta->familia_id))? 'selected="selected"' : '' }}>Todas</option>
-			@foreach ($familias as $familia)
-				<option value="{{ $familia->IdFamilia }}"{{ ($familia->IdAgrupacion == $pregunta->familia_id)? 'selected="selected"' : '' }}>{{ $familia->Familia }}</option>
-			@endforeach
-			</select>
-		</div>
-		<div id="subfamilias">
-			<label for="familia">Subfamilia</label>
-			<select id="subfamilia" name="subfamilia"{{ (is_null($pregunta->familia_id))? 'class="oculto"' : '' }}>
-				<option value="0"{{ (is_null($pregunta->agrupacion_id))? 'selected="selected"' : '' }}>Todas</option>
-			@foreach ($agrupaciones as $agrupacion)
-				<option value="{{ $agrupacion->IdAgrupacion }}"{{ ($agrupacion->IdAgrupacion == $pregunta->agrupacion_id)? 'selected="selected"' : '' }}>{{ $agrupacion->AgrupacionFamilia }}</option>
-			@endforeach
-			</select>
-		</div>
-		{{ Form::hidden('mensaje', 'mensaje1') }}
-		{{ Form::submit('Enviar') }}
-	{{ Form::close() }}
+</head>
+<body>
+	<div id="container" style="width:100%; height:400px;"></div>
 
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js') }}
-
+	{{ HTML::script('js/charts/highstock.js') }}
 	<script>
 		$(document).ready(function($) {
-			var familias = $('#familias');
-			var subfamilias = $('#subfamilias');
-			$('#agrupacion').change(function(e) {
-				e.preventDefault();
-				var agrupacion = $(this).val();
-				if(agrupacion != 0) {
-					$.getJSON('obtener_familias/' + agrupacion, function(response) {
-						var familia = $('#familia');
-						familia.empty();
-						var option = $('<option/>', {'value': 0, 'text': 'Todas'});
-						familia.append(option);
-						$.each(response, function(k, v) {
-							var option = $('<option/>', {'value': v.IdFamilia, 'text': v.Familia});
-							familia.append(option);
-						});
-					});
+			
 
-					familias.css('display', 'inline-block');
-				}
-				else {
-					familias.css('display', 'none');
-				}
+		    $.getJSON('/obtener_resultados', function(data) {
+		    	Highcharts.setOptions({
+					lang: {
+						months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+						weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+						shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+						loading: "Cargando"
+					},
+					global: {
+			            timezoneOffset: -2 * 60
+			        }
+				});
 
-				subfamilias.css('display', 'none');
-			});
+		        $('#container').highcharts('StockChart', {
+				    chart: {
+				        alignTicks: true
+				    },
 
-			$('#familia').change(function(e) {
-				e.preventDefault();
-				var familia = $(this).val();
-				console.log(familia);
-				if(familia != 0) {
-					$.getJSON('obtener_subfamilias/' + familia, function(response) {
-						console.log(response);
-						var subfamilia = $('#subfamilia');
-						subfamilia.empty();
-						var option = $('<option/>', {'value': 0, 'text': 'Todas'});
-						subfamilia.append(option);
-						$.each(response, function(k, v) {
-							var option = $('<option/>', {'value': v.IdSubfamilia, 'text': v.Subfamilia});
-							subfamilia.append(option);
-						});
-					});
+				    series: [{
+				        type: 'column',
+				        name: 'Nota media',
+				        data: data,
+				        dataGrouping: {
+							units: [[
+								'month',
+								[1]
+							]]
+				        },
+				        tooltip: {
+							valueDecimals: 2
+						}
+				    }],
 
-					subfamilias.css('display', 'inline-block');
-				}
-				else {
-					subfamilias.css('display', 'none');
-				}
-			});
+				    credits: {
+				    	/*
+		                text: 'webKreativos.com',
+		        		href: 'http://www.webkreativos.com'
+		        		*/
+		        		enabled: false
+		            },
+		            
+		            rangeSelector: {
+		            	enabled: false,
+		            },
+
+		            yAxis : {
+						plotBands : [{
+							from : 0,
+							to : 4.5,
+							color : 'rgba(255,161,161,.8)'
+						}, {
+							from : 4.5,
+							to : 8,
+							color : 'rgba(255,243,161,.8)'
+						}, {
+							from : 8,
+							to : 10,
+							color : 'rgba(170,243,117,.6)'
+						}]
+					},
+
+				});
+		    });
 		});
 	</script>
+	
+</body>
+</html>

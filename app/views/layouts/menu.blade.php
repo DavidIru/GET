@@ -9,9 +9,21 @@
 		@if ($rol_id == 1 || $rol_id == 2)
 		<li><a href="{{ URL::to('promociones') }}" title="Gestionar promociones"><span class="icon-tags rosa"></span>Promociones</a></li>
 		<li id="menu-encuestas">
-			<p id="btn-encuestas"><span class="icon-copy azul"></span>Encuestas</p>
+			<a id="btn-encuestas">
+				<span class="icon-copy azul"></span>Encuestas
+				@if ($comentarios_pendientes != 0)
+					<div class="circulo">{{ $comentarios_pendientes }}</div>
+				@endif
+			</a>
 			<ul>
-				<li><a href="{{ URL::to('encuestas/resultados') }}" title="Analizar resultados"><span class="icon-chart azul"></span>Analizar resultados</a></li>
+				<li>
+					<a href="{{ URL::to('encuestas/resultados') }}" title="Analizar resultados">
+						<span class="icon-chart azul"></span>Analizar resultados
+						@if ($comentarios_pendientes != 0)
+							<div class="circulo">{{ $comentarios_pendientes }}</div>
+						@endif
+					</a>
+				</li>
 				<li><a href="{{ URL::to('encuestas/preguntas') }}" title="Listado de preguntas"><span class="icon-comments azul"></span>Listado de preguntas</a></li>
 			</ul>
 		</li>

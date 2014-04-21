@@ -24,7 +24,7 @@
 		<span class="icon-menu"></span>
 	</header>
 	<div id="contenedor">
-		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id, 'notificaciones' => Auth::user()->notificaciones))
+		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id, 'notificaciones' => Auth::user()->notificaciones, 'comentarios_pendientes' => Comentario::where('leido', 0)->count()))
 		
 		<div id="contenido">
 			@yield('breadcrumb')

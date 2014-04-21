@@ -18,6 +18,7 @@ class CrearTablaComentarios extends Migration {
             
             $table->integer('encuesta_id');
             $table->longText('comentario');
+            $table->boolean('leido', 0);
             
             $table->timestamps();
         });

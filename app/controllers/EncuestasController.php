@@ -1,7 +1,11 @@
 <?php 
 class EncuestasController extends BaseController {
 	public function listadoPreguntas() {
-		$preguntas = PreguntaEncuesta::where('activa', 1)->get();
+		$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->get();
 		$agrupaciones = FamiliasAgrupacion::orderBy('AgrupacionFamilia', 'asc')->get();
 
 		return View::make('encuestas.listado', array('preguntas' => $preguntas, 'agrupaciones' => $agrupaciones));
@@ -14,21 +18,41 @@ class EncuestasController extends BaseController {
 		$filtro = true;
 
 		if($agrupacion == null) {
-			$preguntas = PreguntaEncuesta::where('activa', 1)->get();
+			$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->get();
 			$filtro = false;
 		}
 		else {
 			if($familia == null) {
-				$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('activa', 1)->get();
+				$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.agrupacion_id', $agrupacion)
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->get();
 			}
 			else {
 				if($subfamilia == null) {
-					$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('familia_id', $familia)
-							->where('activa', 1)->get();
+					$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.agrupacion_id', $agrupacion)
+							->where('Preguntas.familia_id', $familia)
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->get();
 				}
 				else {
-					$preguntas = PreguntaEncuesta::where('agrupacion_id', $agrupacion)->where('familia_id', $familia)
-							->where('subfamilia_id', $subfamilia)->where('activa', 1)->get();
+					$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.agrupacion_id', $agrupacion)
+							->where('Preguntas.familia_id', $familia)
+							->where('Preguntas.subfamilia_id', $subfamilia)
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->get();
 				}
 			}
 		}
@@ -39,7 +63,12 @@ class EncuestasController extends BaseController {
 	}
 
 	public function pregunta($pregunta_id) {
-		$pregunta = PreguntaEncuesta::find($pregunta_id);
+		//$pregunta = PreguntaEncuesta::find($pregunta_id);
+		$pregunta = PreguntaEncuesta::select(DB::raw('Preguntas.*, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->where('Preguntas.activa', 1)
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->firstOrFail();
 
 		$agrupacion = null;
 		$familia = null;
@@ -219,7 +248,19 @@ class EncuestasController extends BaseController {
 	}
 
 	public function resultados() {
-		echo "a";
+		$comentarios = Comentario::select('id', 'comentario', 'leido')
+							->orderBy('leido', 'asc')
+							->orderBy('created_at', 'desc')
+							->get();
+
+		$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
+							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->groupBy('PreguntasEnvio.pregunta_id')
+							->orderBy('media', 'asc')
+							->take(10)
+							->get();
+
+		return View::make('encuestas.resultados', array('comentarios' => $comentarios, 'preguntas' => $preguntas));
 	}
 
 	public function verEncuesta($numero) {
@@ -266,5 +307,43 @@ class EncuestasController extends BaseController {
 
 			return View::make('encuestas.respondida', array('encuesta' => $encuesta));
 		}
+	}
+
+	public function obtenerResultados() {
+		//DB::raw('YEAR(start)'), '=', date('Y')
+		$resultados = PreguntasEnvio::select(DB::raw('PreguntasEnvio.updated_at as date, avg(resultado) as avg'))
+							->join('Encuestas', 'Encuestas.id', '=', 'PreguntasEnvio.encuesta_id')
+							->where('Encuestas.respondida', 1)
+							//->groupBy('encuesta_id')
+							->orderBy('PreguntasEnvio.updated_at', 'asc')
+							->groupBy(DB::raw("YEAR(PreguntasEnvio.updated_at), MONTH(PreguntasEnvio.updated_at), DAY(PreguntasEnvio.updated_at)"))
+							//->orderBy(DB::raw("DATE_FORMAT('updated_at', '%Y%m')"), 'asc')
+							//->groupBy(DB::raw("DATE_FORMAT('updated_at', '%Y%m')"))
+							->get();
+		$respuesta = array();
+		foreach($resultados as $resultado) {
+			/*$a_restar = explode(" ", date("H i s", strtotime($resultado->date)));
+			$tiempo = strtotime($resultado->date) - $a_restar[0] * 3600 - $a_restar[1] * 60 - $a_restar[2];*/
+			$tiempo = strtotime($resultado->date);
+			array_push($respuesta, array($tiempo*1000, (float)$resultado->avg));
+		}
+
+		return Response::json($respuesta);
+	}
+
+	public function verComentario($comentario_id) {
+		$comentario = Comentario::select('id', 'comentario', 'leido', 'updated_at')
+							->find($comentario_id);
+		
+		if($comentario->leido == 0) {
+			//Guardamos el comentario y en estado para enviarlo a la vista
+			$leido = 0;
+			$comentario->leido = 1;
+			$comentario->save();
+		}
+		else
+			$leido = 1;
+
+		return View::make('encuestas.comentario', array('comentario' => $comentario, 'leido' => $leido));
 	}
 }

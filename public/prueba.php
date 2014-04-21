@@ -10,26 +10,8 @@
 </head>
 <body>
 	<?php
-		$temp = "";
-		$sustituciones = array(
-			'nombre' => '$cliente->nombre',
-			'email' => '$cliente->email'
-		);
-
-		$campo = "nombre";
-		if(array_key_exists($campo, $sustituciones)) {
-			$temp = "{{$sustituciones[$campo]}}";
-		}
-		else echo "mal";
-
-		echo $temp;
+		echo strtotime("now"), "\n";
+		echo strtotime("+2 hours"), "\n";
 	?>
-	<script>
-		$(document).ready(function() {
-			$('#contenido').redactor({
-				toolbarFixedBox: true
-			});
-		});
-	</script>
 </body>
 </html>

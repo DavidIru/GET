@@ -58,6 +58,8 @@ Route::group(array('before' => 'auth'), function()
 			->where('id', '[0-9]+');
 		
 		Route::get('encuestas/resultados', 'EncuestasController@resultados');	
+		Route::get('encuestas/comentario/{id}', 'EncuestasController@verComentario')
+		->where('id', '[0-9]+');
 		Route::get('encuestas/preguntas', 'EncuestasController@listadoPreguntas');
 		Route::get('encuestas/pregunta/{id}', 'EncuestasController@pregunta')
 			->where('id', '[0-9]+');
@@ -89,7 +91,7 @@ Route::group(array('before' => 'auth'), function()
 
 		Route::group(array('before' => 'rol_vendedor'), function()
 		{
-			Route::post('encuestas', 'EncuestasController@listadoPreguntasFiltrado');
+			Route::post('encuestas/preguntas', 'EncuestasController@listadoPreguntasFiltrado');
 			Route::post('encuestas/pregunta/{id}', 'EncuestasController@editar')
 				->where('id', '[0-9]+');
 			Route::post('encuestas/pregunta/{id}/eliminar', 'EncuestasController@eliminar')
@@ -120,6 +122,7 @@ Route::group(array('before' => 'auth'), function()
 		->where('id', '[0-9]+');
 	Route::get('obtener_subfamilias/{id}', 'EncuestasController@obtenerSubfamilias')
 		->where('id', '[0-9]+');
+	Route::get('obtener_resultados', 'EncuestasController@obtenerResultados');
 });
 
 

@@ -65,15 +65,17 @@
 		<table id="tabla">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th style="display: none">id</th>
 					<th>Pregunta</th>
+					<th>Nota Media</th>
 				</tr>
 			</thead>
 			<tbody>
 			@foreach ($preguntas as $pregunta)
 				<tr>
-					<td>{{ $pregunta->id }}</td>
-					<td>{{ $pregunta->texto }}</td>
+					<td style="display: none">{{ $pregunta->id }}</td>
+					<td>{{ (strlen($pregunta->texto)>30) ? substr($pregunta->texto, 0, 30)."..." : $pregunta->texto }}</td>
+					<td>{{ number_format($pregunta->media, 2) }}</td>
 				</tr>
 			@endforeach
 			</tbody>
