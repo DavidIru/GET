@@ -123,6 +123,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('obtener_subfamilias/{id}', 'EncuestasController@obtenerSubfamilias')
 		->where('id', '[0-9]+');
 	Route::get('obtener_resultados', 'EncuestasController@obtenerResultados');
+	Route::get('obtener_resultados/{id}', 'EncuestasController@obtenerResultadosPregunta')
+		->where('id', '[0-9]+');
 });
 
 

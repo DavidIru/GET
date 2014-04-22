@@ -10,7 +10,17 @@ class HomeController extends BaseController {
 									->orwhereNull('HoraEntrega');
 							})
 							->orderBy('FechaDocumento', 'asc')->get();
-		return View::make('home', array('pedidos' => $pedidos));
+
+		$comentarios = Comentario::select('id', 'comentario', 'leido')
+							->where('leido', 0)
+							->orderBy('created_at', 'desc')
+							->get();
+
+		$media = PreguntasEnvio::join('Encuestas', 'Encuestas.id', '=', 'PreguntasEnvio.encuesta_id')
+							->where('Encuestas.respondida', 1)
+							->avg('resultado');
+		
+		return View::make('home', array('pedidos' => $pedidos, 'comentarios' => $comentarios, 'media' => $media));
 	}
 
 	public function pruebas() {

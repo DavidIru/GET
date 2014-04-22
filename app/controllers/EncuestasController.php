@@ -331,6 +331,29 @@ class EncuestasController extends BaseController {
 		return Response::json($respuesta);
 	}
 
+	public function obtenerResultadosPregunta($pregunta_id) {
+		//DB::raw('YEAR(start)'), '=', date('Y')
+		$resultados = PreguntasEnvio::select(DB::raw('PreguntasEnvio.updated_at as date, avg(resultado) as avg'))
+							->join('Encuestas', 'Encuestas.id', '=', 'PreguntasEnvio.encuesta_id')
+							->where('Encuestas.respondida', 1)
+							->where('PreguntasEnvio.pregunta_id', $pregunta_id)
+							//->groupBy('encuesta_id')
+							->orderBy('PreguntasEnvio.updated_at', 'asc')
+							->groupBy(DB::raw("YEAR(PreguntasEnvio.updated_at), MONTH(PreguntasEnvio.updated_at), DAY(PreguntasEnvio.updated_at)"))
+							//->orderBy(DB::raw("DATE_FORMAT('updated_at', '%Y%m')"), 'asc')
+							//->groupBy(DB::raw("DATE_FORMAT('updated_at', '%Y%m')"))
+							->get();
+		$respuesta = array();
+		foreach($resultados as $resultado) {
+			/*$a_restar = explode(" ", date("H i s", strtotime($resultado->date)));
+			$tiempo = strtotime($resultado->date) - $a_restar[0] * 3600 - $a_restar[1] * 60 - $a_restar[2];*/
+			$tiempo = strtotime($resultado->date);
+			array_push($respuesta, array($tiempo*1000, (float)$resultado->avg));
+		}
+
+		return Response::json($respuesta);
+	}
+
 	public function verComentario($comentario_id) {
 		$comentario = Comentario::select('id', 'comentario', 'leido', 'updated_at')
 							->find($comentario_id);

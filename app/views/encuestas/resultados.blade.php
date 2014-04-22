@@ -60,7 +60,7 @@
 			@foreach ($preguntas as $pregunta)
 				<tr>
 					<td style="display: none">{{ $pregunta->id }}</td>
-					<td style="display: none">{{ ($pregunta->media < 5.5)? "no-leido" : "leido" }}</td>
+					<td style="display: none">leido</td>
 					<td>{{ (strlen($pregunta->texto)>30) ? substr($pregunta->texto, 0, 30)."..." : $pregunta->texto }}</td>
 					<td>{{ number_format($pregunta->media, 2) }}</td>
 				</tr>
@@ -122,6 +122,9 @@
 					chart: {
 						alignTicks: false
 					},
+					colors: [
+						'#2b4b8c'
+					],
 					series: [{
 						type: 'column',
 						name: 'Nota media',

@@ -13,6 +13,13 @@ body
 	font-size 16px
 	font-weight 100
 	margin 0
+footer
+	background-color #333
+	background-image url(../img/fondo.png)
+	bottom 0
+	height 5px
+	position fixed
+	width 100%
 header
 	background-color #333
 	background-image url(../img/fondo.png)
@@ -176,7 +183,7 @@ nav
 	article
 		display inline-block
 		height 10em
-		margin 2em 0
+		margin 1em 0 2em
 		text-align center
 		vertical-align top
 		width 49%
@@ -186,7 +193,7 @@ nav
 		h4
 			font-size 80px
 			margin 0
-		&#media-semanal
+		&#comentarios-nuevos
 			border-right 1px solid #aaa
 		&#media-total
 			border none
@@ -253,6 +260,8 @@ nav
 /* Colores */
 .amarillo
 	color #FDF872
+.amarillo-fuerte
+	color #FFF715
 .azul
 	color #73B6FF
 .azul-claro
@@ -266,16 +275,22 @@ nav
 .naranja
 	color #FFBD76
 .rojo
-	color #FF6E79			
+	color #FF6E79
+.rojo-fuerte
+	color #ee1a1a			
 .rosa
 	color #fd9ce2
 .verde
 	color #91FD77
+.verde-fuerte
+	color #00CC21
 .verde-oscuro
 	color #64ab26
 
 .oculto
 	display none
+.sombreado
+	text-shadow 0 1px 4px rgba(0, 0, 0, 1)
 
 @import 'clientepromocion'
 @import 'comentario'

@@ -45,6 +45,11 @@
 			<h4><strong>Creación:</strong> {{ date("d/m/Y H:i", strtotime($pregunta->created_at)) }}h</h4>
 			<h4><strong>Último cambio:</strong> {{ ($pregunta->updated_at == $pregunta->created_at)? "No ha habido cambios" : date("d/m/Y H:i", strtotime($pregunta->updated_at))."h" }}</h4>
 		</div>
+		<div id="preguntagrafico">
+			<h2>Nota media mensual de la pregunta</h2>
+			<div id="chart"></div>
+		</div>
+		{{--
 		<div id="preguntacambios0">
 			<h2>Cambiar pregunta</h2>
 			<p>Esta es la pregunta que se realizará al cliente una vez recibido su pedido.</p>
@@ -67,6 +72,7 @@
 				{{ Form::submit('Enviar') }}
 			{{ Form::close() }}
 		</div>
+		--}}
 		<div id="preguntacambios1">
 			<h2>Cambiar pertenencia</h2>
 			<p>Esto indicará con que productos se realizará la pregunta.</p>
@@ -130,6 +136,7 @@
 
 @section('scripts')
 	{{ HTML::script('js/jquery.placeholder.js') }}
+	{{ HTML::script('js/charts/highstock.js') }}
 	<script>
 		$(document).ready(function($) {
 			$('input, textarea').placeholder();
@@ -186,6 +193,90 @@
 				else {
 					subfamilias.attr('class', 'oculto');
 				}
+			});
+
+			//Generamos el gráfico
+			$.getJSON('/obtener_resultados/{{ $pregunta->id }}', function(data) {
+				Highcharts.setOptions({
+					lang: {
+						months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+						weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+						shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+						loading: "Cargando"
+					},
+					global: {
+						timezoneOffset: -2 * 60
+					}
+				});
+
+				$('#chart').highcharts('StockChart', {
+					chart: {
+						alignTicks: false
+					},
+					colors: [
+						'#2b4b8c'
+					],
+					series: [{
+						type: 'column',
+						name: 'Nota media',
+						data: data,
+						dataGrouping: {
+							approximation: "average",
+							enabled: true,
+							forced: true,
+							units: [
+								['month',[1]]
+							]
+						},
+						tooltip: {
+							valueDecimals: 2
+						}
+					}],
+					credits: {
+						/*
+						text: 'webKreativos.com',
+						href: 'http://www.webkreativos.com'
+						*/
+						enabled: false
+					},
+					rangeSelector: {
+						enabled: true,
+						selected: 0,
+						inputEnabled: false,
+						buttonSpacing: 10,
+						buttons: [{
+							type: 'month',
+							count: 3,
+							text: '3m'
+						}, {
+							type: 'month',
+							count: 6,
+							text: '6m'
+						}, {
+							type: 'year',
+							count: 1,
+							text: '1y'
+						}, {
+							type: 'all',
+							text: 'Todo'
+						}]
+					},
+					yAxis : {
+						plotBands : [{
+							from : 0,
+							to : 4.5,
+							color : 'rgba(255,161,161,.8)'
+						}, {
+							from : 4.5,
+							to : 8,
+							color : 'rgba(255,243,161,.8)'
+						}, {
+							from : 8,
+							to : 10,
+							color : 'rgba(170,243,117,.6)'
+						}]
+					}
+				});
 			});
 		});
 	</script>
