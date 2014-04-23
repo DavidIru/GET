@@ -59,6 +59,7 @@
 			<h4><strong>Provincia:</strong> {{ (strlen($envio->CLProviniciaEnvio) == 0)? '---': $envio->CLProviniciaEnvio }}</h4>
 			<h4><strong>C.P:</strong> {{ (strlen($envio->CLCodPostalEnvio) == 0)? '---': $envio->CLCodPostalEnvio }}</h4>
 			<h3><strong>Teléfono:</strong> {{ $envio->CLTelefonoEnvio }}</h3>
+			<h3><strong>Teléfono de aviso:</strong> {{ (is_null($envio->telefonoAviso))? explode(' ', $envio->CLTelefonoEnvio)[0] : $envio->telefonoAviso }}</h3>
 			<div id="cuadro">
 				<div id="mapa"></div>
 			</div>

@@ -24,8 +24,7 @@
 		<span class="icon-menu"></span>
 	</header>
 	<div id="contenedor">
-		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id, 'notificaciones' => Auth::user()->notificaciones, 'comentarios_pendientes' => Comentario::where('leido', 0)->count()))
-		
+		@include('layouts.menu', array('rol_id' => Auth::user()->rol_id, 'notificaciones' => Auth::user()->notificaciones, 'comentarios_pendientes' => Comentario::where('leido', 0)->count(), 'pedidos_programados' => Pedido::whereNull('Situacion')->where(function($query) { $query->whereNotNull('FechaEntrega')->whereNotNull('HoraEntrega'); })->count()))
 		<div id="contenido">
 			@yield('breadcrumb')
 			@yield('acciones')

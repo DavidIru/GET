@@ -18,7 +18,7 @@ class EnviosController extends BaseController {
 		$envio = Pedido::select('IdDocumento', 'NumeroDocumento', 'FechaDocumento', 'CLNombre', 'CLNombreEnvio', 
 							'CLDireccionEnvio', 'CLCiudadEnvio', 'CLProviniciaEnvio', 'CLCodPostalEnvio', 
 							'CLTelefonoEnvio', 'Situacion', 'ImporteAcuenta', 'DescripcionFormaPagoDocumento', 
-							'FechaEntrega', 'HoraEntrega')
+							'FechaEntrega', 'HoraEntrega', 'telefonoAviso')
 							->whereNull('Situacion')
 							->where(function($query) {
 								$query->whereNotNull('FechaEntrega')
@@ -34,7 +34,7 @@ class EnviosController extends BaseController {
 	}
 
 	public function verProgramar($envio_id) {
-		$envio = Pedido::select('IdDocumento', 'NumeroDocumento', 'FechaEntrega', 'HoraEntrega')
+		$envio = Pedido::select('IdDocumento', 'NumeroDocumento', 'FechaEntrega', 'HoraEntrega', 'CLTelefonoEnvio', 'telefonoAviso')
 							->whereNull('Situacion')
 							->where(function($query) {
 								$query->whereNotNull('FechaEntrega')
@@ -51,28 +51,35 @@ class EnviosController extends BaseController {
 		$datos = array(
 			'fecha' => Input::get('envio_fecha'),
 			'hora' => Input::get('hora'),
-			'avisar' => (Input::get('avisarp'))? true : false
+			'avisar' => (Input::get('avisarp'))? true : false,
+			'telefono' => Input::get('telefonop')
 		);
 
 		$validacion = array(
 			'fecha' => array('required', 'date'),
-			'hora' => array('required', 'dateformat:H:i')
+			'hora' => array('required', 'dateformat:H:i'),
+			'telefono' => array('required_if:avisar,true', 'numeric')
 		);
 
-		$validacion = Validator::make($datos, $validacion);
+		$mensajes = array(
+			'required_if' => 'El :attribute es requerido si quiere avisar al cliente.',
+		);
+
+		$validacion = Validator::make($datos, $validacion, $mensajes);
 		 
 		if($validacion->fails()) {
 			$errores = $validacion->messages();
-			return View::make('envios.programar', array('envio' => $envio, 'errores' => $errores->all()));
+			return View::make('envios.programar', array('envio' => $envio, 'errores' => $errores->all(), 'error' => 1));
 		}
 		else {
 			$envio->FechaEntrega = $datos['fecha']." ".$datos['hora'];
 			$envio->HoraEntrega = $datos['fecha']." ".$datos['hora'];
+			$envio->telefonoAviso = $datos['telefono'];
 			//Guardamos el envío
 			$envio->save();
 			if($datos['avisar']) {
 				//Avisamos al cliente
-				echo "avisar";
+				$telefono = $datos['telefono'];
 			}
 			return Redirect::to(URL::to('envio/'.$envio->IdDocumento))
 								->with('exito', true);
@@ -84,19 +91,37 @@ class EnviosController extends BaseController {
 		$envio = Pedido::find($envio_id);
 
 		$datos = array(
-			'avisar' => (Input::get('avisarc'))? true : false
+			'avisar' => (Input::get('avisarc'))? true : false,
+			'telefono' => Input::get('telefonoc')
 		);
-		
-		$envio->FechaEntrega = NULL;
-		$envio->HoraEntrega = NULL;
-		//Guardamos el envío
-		$envio->save();
-		if($datos['avisar']) {
-			//Avisamos al cliente
-			echo "avisar";
+
+		$validacion = array(
+			'telefono' => array('required_if:avisar,true', 'numeric')
+		);
+
+		$mensajes = array(
+			'required_if' => 'El :attribute es requerido si quiere avisar al cliente.',
+		);
+
+		$validacion = Validator::make($datos, $validacion, $mensajes);
+		 
+		if($validacion->fails()) {
+			$errores = $validacion->messages();
+			return View::make('envios.programar', array('envio' => $envio, 'errores' => $errores->all(), 'error' => 2));
 		}
-		return Redirect::to(URL::to('pedido/'.$envio->IdDocumento))
-							->with('exito', true);
+		else {
+			$envio->FechaEntrega = NULL;
+			$envio->HoraEntrega = NULL;
+			$envio->telefonoAviso = NULL;
+			//Guardamos el envío
+			$envio->save();
+			if($datos['avisar']) {
+				//Avisamos al cliente
+				$telefono = $datos['telefono'];
+			}
+			return Redirect::to(URL::to('pedido/'.$envio->IdDocumento))
+								->with('exito', true);
+		}
 	}
 
 	public function entregado($envio_id) {

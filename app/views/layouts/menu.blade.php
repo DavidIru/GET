@@ -3,9 +3,15 @@
 	<ul>
 		<li><a href="{{ URL::to('/') }}" title="Ir a inicio"><span class="icon-home naranja"></span>Inicio</a></li>
 		@if ($rol_id == 1 || $rol_id == 2)
-		<li><a href="{{ URL::to('pedidos') }}" title="Gestionar pedidos"><span class="icon-cart gris"></span>Pedidos</a></li>
+			<li><a href="{{ URL::to('pedidos') }}" title="Gestionar pedidos"><span class="icon-cart gris"></span>Pedidos</a></li>
 		@endif
-		<li><a href="{{ URL::to('envios') }}" title="Gestionar envíos"><span class="icon-truck verde"></span>Envíos</a></li>
+		<li>
+			<a href="{{ URL::to('envios') }}" title="Gestionar envíos"><span class="icon-truck verde"></span>Envíos
+			@if ($pedidos_programados != 0)
+					<div class="circulo">{{ $pedidos_programados }}</div>
+				@endif
+			</a>
+		</li>
 		@if ($rol_id == 1 || $rol_id == 2)
 		<li><a href="{{ URL::to('promociones') }}" title="Gestionar promociones"><span class="icon-tags rosa"></span>Promociones</a></li>
 		<li id="menu-encuestas">

@@ -52,6 +52,10 @@
 				</div>
 				<div id="check">
 					<input type="checkbox" name="avisarp" id="avisarp" value="1">{{ Form::label('avisarp', 'Avisar al cliente') }}
+					<div>
+						{{ Form::label('telefono', 'Teléfono') }}
+						{{ Form::text('telefono', (is_null($pedido->telefonoAviso))? explode(' ', $pedido->CLTelefonoEnvio)[0] : $pedido->telefonoAviso, array('placeholder' => 'Teléfono')) }}
+					</div>
 				</div>
 				{{ Form::submit('Programar') }}
 			{{ Form::close() }}
@@ -87,6 +91,15 @@
 	    		format: 'HH:i',
 	    		formatSubmit: 'HH:i',
 	    		interval: 15
+			});
+
+			$('#avisarp').on('change', function() {
+				if($(this).is(':checked')) {
+					$('#check').animate({ "height": "5em"}, 200, "linear");
+				}
+				else {
+					$('#check').animate({ "height": "1.3em"}, 200, "linear");
+				}
 			});
 		});
 	</script>
