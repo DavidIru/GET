@@ -1,5 +1,11 @@
 <?php
-
+/*
+|--------------------------------------------------------------------------
+| Controlador base
+|--------------------------------------------------------------------------
+| Controlador con las funciones generales
+|
+*/
 class BaseController extends Controller {
 
 	/**

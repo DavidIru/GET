@@ -78,3 +78,29 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Filtros para comprobar niveles del usuario
+|--------------------------------------------------------------------------
+|
+| Comprobamos el nivel del usuario para limitar el acceso a las 
+| funcionalidades.
+|
+*/
+// Filtro para comprobar que el usuario es administrador
+Route::filter('rol_admin', function()
+{
+	if(Auth::user()->rol_id != 1) {
+		return Redirect::to("/");
+	}
+});
+
+// Filtro para comprobar que el usuario es vendedor
+Route::filter('rol_vendedor', function()
+{
+	if(Auth::user()->rol_id != 1 && Auth::user()->rol_id != 2) {
+		return Redirect::to("/");
+	}
+});

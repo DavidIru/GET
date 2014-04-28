@@ -1,25 +1,33 @@
 <?php
-
+/*
+|--------------------------------------------------------------------------
+| Controlador de la autenticación de usuarios
+|--------------------------------------------------------------------------
+| Controlador con las funciones relacionadas con los usuarios
+|
+*/
 class AuthController extends BaseController {
-    /*
-    |--------------------------------------------------------------------------
-    | Controlador de la autenticación de usuarios
-    |--------------------------------------------------------------------------
+    /**
+    * Muestra el formulario de login
+    * @return Vista usuarios.login
     */
-    public function verLogin()
-    {
+    public function verLogin() {
         // Verificamos que el usuario no esté autenticado
         if (Auth::check())
         {
             // Si está autenticado lo mandamos a la raíz donde estara el mensaje de bienvenida.
             return Redirect::to('/');
         }
-        // Mostramos la vista login.blade.php
+        // Mostramos la vista usuarios/login.blade.php
         return View::make('usuarios.login');
     }
 
-    public function postLogin()
-    {
+    /**
+    * Procesa los datos del login
+    * @return Si el login ha sido correcto -> Redirección a /
+    *         Si el login ha sido erróneo -> Redirección a /login con errores
+    */
+    public function postLogin() {
         // Guardamos en un arreglo los datos del usuario.
         $datos = array(
             'usuario' => Input::get('usuario'),
@@ -38,8 +46,11 @@ class AuthController extends BaseController {
                     ->withInput();
     }
 
-    public function logout()
-    {
+    /**
+    * Desloguea al usuario actual
+    * @return Redirección a /login con aviso de éxito
+    */
+    public function logout() {
         Auth::logout();
         return Redirect::to('login')
                     ->with('titulo_exito', 'Tu sesión ha sido cerrada.')

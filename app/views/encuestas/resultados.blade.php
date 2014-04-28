@@ -164,7 +164,7 @@
 						}, {
 							type: 'year',
 							count: 1,
-							text: '1y'
+							text: '1a'
 						}, {
 							type: 'all',
 							text: 'Todo'

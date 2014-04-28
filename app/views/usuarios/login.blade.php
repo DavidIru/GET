@@ -45,7 +45,6 @@
 	<script>
 		$(document).ready(function($) {
 			$('input, textarea').placeholder();
-		$(document).ready(function() {
 			$('.loader').fadeTo(400, 0);
 			$('figure').animate({"margin-top": "2em"}, 1500);
 			$('form').fadeIn(1500);

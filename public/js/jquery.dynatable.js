@@ -856,7 +856,8 @@
       // but just recently, this started throwing an error if I don't convert it:
       // 'Uncaught Error: DATA_CLONE_ERR: DOM Exception 25'
       cache.dynatable.dataset.perPageOptions = $.makeArray(cache.dynatable.dataset.perPageOptions);
-
+      /* COMENTARIO POR LOS TITLES DE LAS PAGINAS */
+      /*
       try {
         window.history[pushFunction](cache, "Dynatable state", path + params + hash);
       } catch(error) {
@@ -864,6 +865,7 @@
         cache.dynatable.dataset.records = null;
         window.history[pushFunction](cache, "Dynatable state", path + params + hash);
       }
+      */
     };
 
     this.pop = function(event) {

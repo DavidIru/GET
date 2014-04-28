@@ -1,16 +1,38 @@
-<?php 
+<?php
+/*
+|--------------------------------------------------------------------------
+| Controlador de los pedidos
+|--------------------------------------------------------------------------
+| Controlador con las funciones relacionadas con los pedidos
+|
+*/
 class PromocionesController extends BaseController {
+	/**
+	* Muestra la página con el listado de clientes inscritos en las promociones
+	* @return Vista promociones.listado => clientes
+	*/
+	public function listado() {
+		// Obtenemos el listado de clientes inscritos en promociones
+		$clientes = ClientesPromocion::select('id', 'nombre', 'telefono', 'email')
+							->orderBy('id', 'desc')
+							->get();
 
-    public function listado() {
-        $clientes = ClientesPromocion::select('id', 'nombre', 'telefono', 'email')->orderBy('id', 'desc')->get();
+		return View::make('promociones.listado', array('clientes' => $clientes));
+	}
 
-        return View::make('promociones.listado', array('clientes' => $clientes));
-    }
-
-    public function formularioAdd() {
+	/**
+	* Muestra el formulario para añadir nuevos clientes a las promociones
+	* @return Vista promociones.formulario-add
+	*/
+	public function formularioAdd() {
 		return View::make('promociones.formulario-add');
 	}
 
+	/**
+	* Procesa el alta de un cliente en las promociones
+	* @return Si la validación es correcta -> Vista promociones.listado => clientes, exito
+	*		  Si la validación es errónea -> Redirección a /promociones/cliente/add con errores y datos de input
+	*/
 	public function add() {
 		$datos = array(
 			'nombre' => Input::get('nombre'),
@@ -24,6 +46,7 @@ class PromocionesController extends BaseController {
 			'email' => array('required_if:telefono,', 'email')
 		);
 
+		// Mensajes de error personalizados para las comprobaciones require_if de teléfono y de email
 		$mensajes = array(
 			'telefono.required_if' => 'El campo :attribute no puede estar en blanco si el campo :other lo está.',
 			'email.required_if' => 'El campo :attribute no puede estar en blanco si el campo :other lo está.',
@@ -31,55 +54,71 @@ class PromocionesController extends BaseController {
 
 		$validacion = Validator::make($datos, $validacion, $mensajes);
 		 
-		if($validacion->fails()) {
+		if($validacion->fails()) { // Los datos no son válidos
 			return Redirect::to('promociones/cliente/add')
-			->withErrors($validacion)
-			->withInput();
+						->withErrors($validacion)
+						->withInput();
 		}
-		else {
+		else { // Los datos son válidos
+			// Añadimos al cliente a la lista de promociones
 			ClientesPromocion::create(array(
 				'nombre'  => $datos['nombre'],
 				'telefono' => ($datos['telefono'] == "")? null : $datos['telefono'],
 				'email' => ($datos['email'] == "")? null : $datos['email']
 			));
 
+			// Obtenemos el nuevo listado de clientes
 			$clientes = ClientesPromocion::select('id', 'nombre', 'telefono', 'email')->orderBy('id', 'desc')->get();
 
-        	return View::make('promociones.listado', array('clientes' => $clientes, 'exito' => 'Se ha inscrito el cliente con éxito'));
+			return View::make('promociones.listado', array('clientes' => $clientes, 'exito' => 'Se ha inscrito el cliente con éxito'));
 		}
 	}
 
+	/**
+	* Muestra los datos del cliente con el id seleccionado
+	* @param int $cliente_id Identificador del cliente
+	* @return Vista promociones.formulario => cliente
+	*/
 	public function cliente($cliente_id) {
+		// Obtenemos el cliente
 		$cliente = ClientesPromocion::find($cliente_id);
 
-        return View::make('promociones.formulario', array('cliente' => $cliente));
+		return View::make('promociones.formulario', array('cliente' => $cliente));
 	}
 
+	/**
+	* Procesa la edición del cliente con el id seleccionado
+	* @param int $cliente_id Identificador del cliente
+	* @return Si el formulario es incorrecto -> Redirección a /promociones/cliente/$cliente_id
+	*		  Sino -> Si los datos son válidos -> Vista promociones.formulario => cliente, mensaje
+	*				  Si no son válidos -> Vista promociones.formulario => cliente, errores, mensaje
+	*/
 	public function editar($cliente_id) {
+		// Obtenemos el cliente con el id $cliente_id
 		$cliente = ClientesPromocion::find($cliente_id);
 
 		$mensaje = array('numero' => Input::get('mensaje'), 'error' => true);
-		//echo $mensaje;
+
 		if($mensaje['numero'] == "mensaje0") {
-			//Procesamos el usuario
+			// Procesamos el nombre
 			$datos = array(
-	            'nombre' => Input::get('nombre')
-	        );
+				'nombre' => Input::get('nombre')
+			);
 
-	        $validacion = array(
-        		'nombre' => array('required', 'max:100')
-        	);
+			$validacion = array(
+				'nombre' => array('required', 'max:100')
+			);
 
-        	$mensajes = array();
+			$mensajes = array();
 		}
 		elseif($mensaje['numero'] == "mensaje1") {
-			//Procesamos el usuario
+			// Procesamos el teléfono y el email
 			$datos = array(
-	            'telefono' => Input::get('telefono'),
-	            'email' => Input::get('email')
-	        );
+				'telefono' => Input::get('telefono'),
+				'email' => Input::get('email')
+			);
 
-	        $validacion = array(
+			$validacion = array(
 				'telefono' => array('required_if:email,', 'numeric'),
 				'email' => array('required_if:telefono,', 'email')
 			);
@@ -89,91 +128,113 @@ class PromocionesController extends BaseController {
 				'email.required_if' => 'El campo :attribute no puede estar en blanco si el campo :other lo está.',
 			);
 		}
-		else {
+		else { // El formulario no es válido
 			return Redirect::to("promociones/cliente/".$cliente_id);
 		}
 
 		$validacion = Validator::make($datos, $validacion, $mensajes);
 		 
-		if($validacion->fails()) {
-		    $errores = $validacion->messages();
-		    return View::make('promociones.formulario', array('cliente' => $cliente, 'errores' => $errores->all(), 'mensaje' => $mensaje));
+		if($validacion->fails()) { // Los datos no son válidos
+			$errores = $validacion->messages();
+			return View::make('promociones.formulario', array('cliente' => $cliente, 'errores' => $errores->all(), 'mensaje' => $mensaje));
 		}
-		else {
-		    if($mensaje['numero'] == "mensaje0") {
-				//Cambiamos el nombre
+		else { // Los datos son válidos
+			if($mensaje['numero'] == "mensaje0") {
+				// Cambiamos el nombre
 				$cliente->nombre = $datos['nombre'];
 			}
 			elseif($mensaje['numero'] == "mensaje1") {
-				//Cambiamos el teléfono y el email
+				// Cambiamos el teléfono y el email
 				$cliente->telefono = $datos['telefono'];
 				$cliente->email = $datos['email'];
 			}
-			//Guardamos el cliente
+			// Guardamos el cliente
 			$cliente->save();
+			// Indicamos que no hay errores
 			$mensaje['error'] = false;
 			return View::make('promociones.formulario', array('cliente' => $cliente, 'mensaje' => $mensaje));
 		}
 	}
 
+	/**
+	* Procesa la eliminación del cliente de las promociones
+	* @param int $cliente_id Identificador del cliente
+	* @return Si el formulario es correcto -> Vista promociones.listado => clientes, exito
+	*		  Si el formulario no es correcto -> Redirección a /promociones
+	*/
 	public function eliminar($cliente_id) {
 		$enviado = Input::get('borrar');
 
-		if($enviado == "borrar") {
+		if($enviado == "borrar") { // El formulario es correcto
+			// Obtenemos el cliente con el id $cliente_id
 			$cliente = ClientesPromocion::find($cliente_id);
+			// Borramos el cliente
 			$cliente->delete();
-
+			// Obtenemos el nuevo listado de clientes
 			$clientes = ClientesPromocion::select('id', 'nombre', 'telefono', 'email')->orderBy('id', 'desc')->get();
 
-        	return View::make('promociones.listado', array('clientes' => $clientes, 'exito' => 'Se ha eliminado el cliente con éxito'));
+			return View::make('promociones.listado', array('clientes' => $clientes, 'exito' => 'Se ha eliminado el cliente con éxito'));
 		}
-		else {
+		else { // El formulario no es correcto
 			return Redirect::to('promociones');
 		}
 	}
 
+	/**
+	* Muestra lel formulario para enviar promociones por sms y por email
+	* @return Vista promociones.formulario-enviar
+	*/
 	public function formularioEnviar() {
 		return View::make('promociones.formulario-enviar');
 	}
 
+	/**
+	* Procesa el envío de la promoción
+	* @return Si el formulario es incorrecto -> Redirección a /promociones/enviar
+	*		  Sino -> Si los datos son válidos -> Vista promociones.formulario-enviar => mensaje
+	*				  Si no son válidos -> Vista promociones.formulario-enviar => errores, mensaje
+	*/
 	public function enviar() {
 		$mensaje = array('tipo' => Input::get('tipo'), 'error' => true);
-		//echo $mensaje;
-		if($mensaje['tipo'] == "sms") {
-			//Procesamos el usuario
-			$datos = array(
-	            'textsms' => Input::get('textsms')
-	        );
 
-	        $validacion = array(
-        		'textsms' => array('required', 'max:160')
-        	);
+		if($mensaje['tipo'] == "sms") {
+			// Procesamos el envío de SMS
+			$datos = array(
+				'textsms' => Input::get('textsms')
+			);
+
+			$validacion = array(
+				'textsms' => array('required', 'max:160')
+			);
 		}
 		elseif($mensaje['tipo'] == "email") {
-			//Procesamos el usuario
+			// Procesamos el envío de email
 			$datos = array(
-	            'asunto' => Input::get('asunto'),
-	            'textmail' => Input::get('textmail')
-	        );
+				'asunto' => Input::get('asunto'),
+				'textmail' => Input::get('textmail')
+			);
 
-	        $validacion = array(
-        		'asunto' => array('required'),
-        		'textmail' => array('required')
-        	);
+			$validacion = array(
+				'asunto' => array('required'),
+				'textmail' => array('required')
+			);
 		}
-		else {
+		else { // Formulario incorrecto
 			return Redirect::to("promociones/enviar/");
 		}
 
 		$validacion = Validator::make($datos, $validacion);
 		 
-		if($validacion->fails()) {
-		    $errores = $validacion->messages();
-		    return View::make('promociones.formulario-enviar', array('errores' => $errores->all(), 'mensaje' => $mensaje));
+		if($validacion->fails()) { // Los datos no son válidos
+			$errores = $validacion->messages();
+			return View::make('promociones.formulario-enviar', array('errores' => $errores->all(), 'mensaje' => $mensaje));
 		}
-		else {
-		    if($mensaje['tipo'] == "sms") {
+		else { // Los datos son válidos
+			if($mensaje['tipo'] == "sms") {
 				//Enviamos los SMS
+				/*
+					ENVIAR SMS
+				*/
 			}
 			elseif($mensaje['tipo'] == "email") {
 				//Enviamos los emails
@@ -200,8 +261,11 @@ class PromocionesController extends BaseController {
 					*/
 				}
 			}
+
+			// Indicamos que no hay errores
 			$mensaje['error'] = false;
-			//return View::make('promociones.formulario-enviar', array('mensaje' => $mensaje));
+			
+			return View::make('promociones.formulario-enviar', array('mensaje' => $mensaje));
 		}
 	}
 }

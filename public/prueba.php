@@ -10,8 +10,11 @@
 </head>
 <body>
 	<?php
-		echo strtotime("now"), "\n";
-		echo strtotime("+2 hours"), "\n";
+		$a=10; 
+
+		if ($a = 9) {echo 'a is 9'};
+
+		echo $a;
 	?>
 </body>
 </html>
