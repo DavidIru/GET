@@ -34,14 +34,14 @@
 			</ul>
 		</li>
 		@endif
-		<li>
+		<!-- <li>
 			<a href="#" title="Gestionar notificaciones">
 				<span class="icon-bell amarillo"></span>Notificaciones
 				@if ($notificaciones != 0)
 					<div class="circulo">{{ $notificaciones }}</div>
 				@endif
 			</a>
-		</li>
+		</li> -->
 	</ul>
 	@if ($rol_id == 1)
 	<h2>Acciones de administración</h2>

@@ -14,7 +14,7 @@
 @section('contenido')
 	<h2>Encuesta del pedido {{ $encuesta->pedido->NumeroDocumento }}<span>entregado el día {{ date('d/m/Y', strtotime($encuesta->pedido->FechaEntrega)) }}</span></h2>
 	<h3>Los resultados de la encuesta son completamente anónimos por lo que agradecemos la máxima sinceridad para mejorar nuestro servicio. Las preguntas se responden de 0 a 10 puntos y todas son obligatorias. Al final de la encuesta encontrará un campo de texto opcional para poder escribirnos los comentarios que quiera.</h3>
-	@if (isset($errors) && !empty($errors->all()))
+	@if (isset($errors) && $errors->all())
 		<div id="mensaje" class="error">
 			<h4>Revise lo siguiente:</h4>
 			<p>Debe responder a todas las preguntas</p>

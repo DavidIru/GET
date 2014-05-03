@@ -28,7 +28,7 @@
 		<div id="clienteadd">
 			<h2>Inscripción de nuevo cliente</h2>
 			<p>Introduzca los datos para la inscripción de un nuevo cliente en la lista de promociones.</p>
-			@if (isset($errors) && !empty($errors->all()))
+			@if (isset($errors) && $errors->all())
 				<div id="mensaje" class="error">
 					<h4>Revise lo siguiente:</h4>
 					@foreach ($errors->all() as $error)

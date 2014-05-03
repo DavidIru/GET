@@ -28,7 +28,7 @@
 		<div id="usuarioadd">
 			<h2>Creación de nuevo usuario</h2>
 			<p>Introduzca los datos para la creación del usuario. La longitud mínima del nombre de usuario es de 5 caracteres. La contraseña debe tener como mínimo 4 caracteres. Para entrar en la aplicación se usarán el nombre de usuario y la contraseña. Todos los campos son obligatorios.</p>
-			@if (isset($errors) && !empty($errors->all()))
+			@if (isset($errors) && $errors->all())
 				<div id="mensaje" class="error">
 					<h4>Revise lo siguiente:</h4>
 					@foreach ($errors->all() as $error)

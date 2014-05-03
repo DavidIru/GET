@@ -141,20 +141,27 @@ class UsuariosController extends BaseController {
 		//Procesamos la contraseña
 		$datos = array(
 			'pass_ant' => Input::get('pass_ant'),
+			'hash_pass_ant' => Hash::check(Input::get('pass_ant'), Auth::user()->password),
 			'pass' => Input::get('pass'),
 			'pass2' => Input::get('pass2')
 		);
 
 		$validacion = array(
 			'pass_ant' => array('required'),
-			Hash::make('pass_ant') => array('exists:Usuarios,password,id,'.Auth::user()->id),
+			'hash_pass_ant' => array('in:1'),
 			'pass' => array('required', 'min:4', 'max:64', 'same:pass2')
 		);
 
-		$validacion = Validator::make($datos, $validacion);
+		// Mensaje de error personalizado para la validación required_if
+		$mensajes = array(
+			'hash_pass_ant.in' => 'La contraseña antigua no es correcta.',
+		);
+
+		$validacion = Validator::make($datos, $validacion, $mensajes);
 		 
 		if($validacion->fails()) { // Los datos no son válidos
 			$errores = $validacion->messages();
+			//echo $datos['hash_pass_ant'];
 			return View::make('usuarios.formulario-individual', array('roles' => $roles, 'errores' => $errores->all(), 'mensaje' => $mensaje));
 		}
 		else { // Los datos son válidos

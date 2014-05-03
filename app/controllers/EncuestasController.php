@@ -14,7 +14,7 @@ class EncuestasController extends BaseController {
 	public function listadoPreguntas() {
 		// Obtenemos el listado de preguntas activas
 		$preguntas = PreguntaEncuesta::select(DB::raw('Preguntas.id as id, Preguntas.texto as texto, avg(PreguntasEnvio.resultado) as media'))
-							->join('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
+							->leftjoin('PreguntasEnvio', 'Preguntas.id', '=', 'PreguntasEnvio.pregunta_id')
 							->where('Preguntas.activa', 1)
 							->groupBy('PreguntasEnvio.pregunta_id')
 							->get();

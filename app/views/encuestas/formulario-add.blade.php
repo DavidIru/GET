@@ -28,7 +28,7 @@
 		<div id="usuarioadd">
 			<h2>Creación de nueva pregunta</h2>
 			<p>Introduzca los datos para la creación de la nueva pregunta. La longitud máxima es de 200 caracteres.</p>
-			@if (isset($errors) && !empty($errors->all()))
+			@if (isset($errors) && $errors->all())
 				<div id="mensaje" class="error">
 					<h4>Revise lo siguiente:</h4>
 					@foreach ($errors->all() as $error)
